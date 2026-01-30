@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://djrdrhloejxal"]
+
+[ext_resource type="Texture2D" uid="uid://buspm1155yp47" path="res://icon.svg" id="1_a8p6y"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="2_b17tg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b17tg"]
+size = Vector2(527, 45)
+
+[node name="LeoTestLevel" type="Node2D" unique_id=2089806708]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1074074447]
+position = Vector2(445, 544)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1308184383]
+shape = SubResource("RectangleShape2D_b17tg")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1802061886]
+position = Vector2(0.49999237, 0)
+scale = Vector2(4.1328125, 0.375)
+texture = ExtResource("1_a8p6y")
+
+[node name="Player" parent="." unique_id=543079533 instance=ExtResource("2_b17tg")]
+position = Vector2(375, 0)
+scale = Vector2(0.27999997, 0.27999997)
