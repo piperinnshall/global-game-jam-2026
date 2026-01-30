@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://bf1of67no735k"]
+
+[ext_resource type="Script" uid="uid://cloppkq726ur4" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://daayyvoeq7x1u" path="res://player_spritesheet.png" id="2_sprite"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(310, 262)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jump"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 80.0
+initial_velocity_min = 80.0
+initial_velocity_max = 150.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, 200, 0)
+damping_min = 20.0
+damping_max = 40.0
+scale_min = 4.0
+scale_max = 10.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_land"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+flatness = 0.3
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+angular_velocity_min = -80.0
+angular_velocity_max = 80.0
+gravity = Vector3(0, 250, 0)
+damping_min = 30.0
+damping_max = 50.0
+scale_min = 5.0
+scale_max = 12.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_walk"]
+particle_flag_disable_z = true
+direction = Vector3(-1, -0.3, 0)
+spread = 25.0
+initial_velocity_min = 30.0
+initial_velocity_max = 60.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+gravity = Vector3(0, -20, 0)
+damping_min = 40.0
+damping_max = 60.0
+scale_min = 3.0
+scale_max = 7.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_trail"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 8.0
+direction = Vector3(0, 0.5, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 20, 0)
+damping_min = 10.0
+damping_max = 20.0
+scale_min = 2.0
+scale_max = 5.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1992027063]
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1586852942]
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(70, 387, 306, 271)
+
+[node name="MaskSprite" type="Sprite2D" parent="Sprite2D" unique_id=1067686723]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041341102]
+position = Vector2(3, -12)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="JumpParticles" type="GPUParticles2D" parent="." unique_id=263276945]
+modulate = Color(1, 1, 1, 0.42745098)
+position = Vector2(0, 130)
+emitting = false
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_jump")
+
+[node name="LandParticles" type="GPUParticles2D" parent="." unique_id=1331328646]
+modulate = Color(1, 1, 1, 0.45882353)
+position = Vector2(-3.0000005, 92.999985)
+rotation = -0.008160591
+emitting = false
+amount = 12
+lifetime = 0.51
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_land")
+
+[node name="WalkParticles" type="GPUParticles2D" parent="." unique_id=459175697]
+modulate = Color(1, 1, 1, 0.37254903)
+position = Vector2(0, 120)
+emitting = false
+amount = 5
+lifetime = 1.8499999999999999
+one_shot = true
+explosiveness = 0.7
+randomness = 0.08
+process_material = SubResource("ParticleProcessMaterial_walk")
+
+[node name="JumpTrail" type="GPUParticles2D" parent="." unique_id=1808285626]
+visible = false
+modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 0.20392157)
+z_index = -1
+emitting = false
+amount = 12
+lifetime = 0.3
+preprocess = 0.05
+collision_base_size = 7.34
+process_material = SubResource("ParticleProcessMaterial_trail")
