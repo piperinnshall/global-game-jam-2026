@@ -31,8 +31,6 @@ extends CharacterBody2D
 # Mask system
 enum MaskType { NONE, MASK_1, MASK_2, MASK_3, MASK_4 }
 var current_mask: MaskType = MaskType.NONE
-var mask_switch_cooldown: float = 0.0
-var mask_switch_cooldown_time: float = 0.3  # Cooldown between mask switches
 
 # Internal state
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -101,17 +99,11 @@ func _ready():
 	# Hide Mask 3 light initially
 	if mask_3_light:
 		mask_3_light.enabled = false
+	
+	# Add player to "player" group so mask pickups can identify it
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
-	# Update mask switch cooldown
-	if mask_switch_cooldown > 0:
-		mask_switch_cooldown -= delta
-	
-	# Handle mask switching with F key (with cooldown)
-	if Input.is_key_pressed(KEY_F) and mask_switch_cooldown <= 0:
-		cycle_mask()
-		mask_switch_cooldown = mask_switch_cooldown_time
-	
 	# Update dash cooldown
 	if dash_cooldown > 0:
 		dash_cooldown -= delta
@@ -280,11 +272,63 @@ func update_flip_animation(delta: float) -> void:
 	var current_y_scale = abs(sprite_container.scale.y)
 	sprite_container.scale = Vector2(facing_direction * flip_squash, current_y_scale)
 
-func cycle_mask() -> void:
-	"""Cycle through available masks"""
-	var next_mask = (current_mask + 1) % 5  # Cycle through 0-4
-	equip_mask(next_mask as MaskType)
-	print("Switched to mask: ", current_mask)
+func equip_mask(mask_type: MaskType) -> void:
+	"""Equip a specific mask and show it on the character"""
+	current_mask = mask_type
+	
+	# Hide all mask sprites first
+	if player_sprite:
+		player_sprite.visible = false
+	if mask_1_sprite:
+		mask_1_sprite.visible = false
+	if mask_2_sprite:
+		mask_2_sprite.visible = false
+	if mask_3_sprite:
+		mask_3_sprite.visible = false
+	if mask_4_sprite:
+		mask_4_sprite.visible = false
+	
+	# Show the appropriate sprite
+	match mask_type:
+		MaskType.NONE:
+			if player_sprite:
+				player_sprite.visible = true
+		MaskType.MASK_1:
+			if mask_1_sprite:
+				mask_1_sprite.visible = true
+		MaskType.MASK_2:
+			if mask_2_sprite:
+				mask_2_sprite.visible = true
+		MaskType.MASK_3:
+			if mask_3_sprite:
+				mask_3_sprite.visible = true
+		MaskType.MASK_4:
+			if mask_4_sprite:
+				mask_4_sprite.visible = true
+	
+	# Apply mask-specific powers
+	apply_mask_powers(mask_type)
+	
+	print("Equipped mask: ", mask_type)
+
+func remove_mask() -> void:
+	"""Remove current mask and return to base character"""
+	equip_mask(MaskType.NONE)
+
+func get_current_mask() -> MaskType:
+	"""Returns the currently equipped mask"""
+	return current_mask
+
+# Function called when player picks up a mask item from the world
+func pickup_mask(mask_type: MaskType) -> void:
+	"""Called when player picks up a mask in the world - this is now the ONLY way to change masks"""
+	equip_mask(mask_type)
+	
+	# Visual feedback - squash effect
+	target_scale = Vector2(1.2, 0.8)
+	
+	# You can add sound effects, particles, or other feedback here
+	print("Picked up mask: ", mask_type)
 
 func detect_double_tap(delta: float) -> void:
 	"""Detect double tap for dash"""
@@ -380,47 +424,6 @@ func emit_double_jump_effect() -> void:
 	if jump_trail:
 		jump_trail.emitting = true
 
-func equip_mask(mask_type: MaskType) -> void:
-	"""Equip a specific mask and show it on the character"""
-	current_mask = mask_type
-	
-	# Hide all mask sprites first
-	if player_sprite:
-		player_sprite.visible = false
-	if mask_1_sprite:
-		mask_1_sprite.visible = false
-	if mask_2_sprite:
-		mask_2_sprite.visible = false
-	if mask_3_sprite:
-		mask_3_sprite.visible = false
-	if mask_4_sprite:
-		mask_4_sprite.visible = false
-	
-	# Show the appropriate sprite
-	match mask_type:
-		MaskType.NONE:
-			if player_sprite:
-				player_sprite.visible = true
-		MaskType.MASK_1:
-			if mask_1_sprite:
-				mask_1_sprite.visible = true
-		MaskType.MASK_2:
-			if mask_2_sprite:
-				mask_2_sprite.visible = true
-		MaskType.MASK_3:
-			if mask_3_sprite:
-				mask_3_sprite.visible = true
-		MaskType.MASK_4:
-			if mask_4_sprite:
-				mask_4_sprite.visible = true
-	
-	# Apply mask-specific powers
-	apply_mask_powers(mask_type)
-
-func remove_mask() -> void:
-	"""Remove current mask and return to base character"""
-	equip_mask(MaskType.NONE)
-
 func apply_mask_powers(mask_type: MaskType) -> void:
 	"""Apply the special powers of the equipped mask"""
 	# Reset all powers to base
@@ -451,16 +454,6 @@ func apply_mask_powers(mask_type: MaskType) -> void:
 		MaskType.MASK_4:
 			# Shockwave mask (handled via space bar input)
 			pass
-
-func get_current_mask() -> MaskType:
-	"""Returns the currently equipped mask"""
-	return current_mask
-
-# Example function for picking up a mask item
-func pickup_mask(mask_type: MaskType) -> void:
-	"""Called when player picks up a mask in the world"""
-	equip_mask(mask_type)
-	# Add visual/sound effects here
 
 # MASK 4 ABILITY: SHOCKWAVE
 func trigger_shockwave() -> void:

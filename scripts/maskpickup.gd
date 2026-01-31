@@ -1,10 +1,7 @@
 extends Area2D
 
 ## Mask pickup item that can be collected by the player
-## Emits a signal when picked up with the mask type
-
-# Signal emitted when player picks up this mask
-signal mask_collected(mask_type: int)
+## Automatically calls the player's pickup_mask function when collected
 
 # Mask type selection (set in inspector)
 enum MaskType { MASK_1, MASK_2, MASK_3, MASK_4 }
@@ -14,8 +11,6 @@ enum MaskType { MASK_1, MASK_2, MASK_3, MASK_4 }
 @export_group("Bob Animation")
 @export var bob_height: float = 15.0  # How high/low the mask bobs
 @export var bob_speed: float = 2.0  # Speed of bobbing (lower = slower)
-
-
 
 @export_group("Collection")
 @export var auto_collect: bool = true  # Automatically collect on touch
@@ -33,7 +28,6 @@ var is_collected: bool = false
 @onready var mask_3_sprite: Sprite2D = $SpriteContainer/Mask3Sprite
 @onready var mask_4_sprite: Sprite2D = $SpriteContainer/Mask4Sprite
 
-
 func _ready() -> void:
 	# Store initial position for bobbing animation
 	initial_position = sprite_container.position
@@ -41,12 +35,12 @@ func _ready() -> void:
 	# Set up the correct mask sprite based on selection
 	update_mask_visibility()
 	
-	
-	
 	# Randomize starting animation phase for variety
 	bob_time = randf() * TAU  # TAU = 2 * PI
 	
-	
+	# Connect to body_entered signal (only if not already connected in editor)
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
 
 func _process(delta: float) -> void:
 	if is_collected:
@@ -58,9 +52,6 @@ func _process(delta: float) -> void:
 	# Apply bobbing motion (sine wave)
 	var bob_offset = sin(bob_time) * bob_height
 	sprite_container.position.y = initial_position.y + bob_offset
-	
-	# Apply glow pulsing effect
-	
 
 func update_mask_visibility() -> void:
 	"""Show only the selected mask sprite"""
@@ -91,20 +82,25 @@ func _on_body_entered(body: Node2D) -> void:
 	if is_collected:
 		return
 	
-	# Check if the body is the player (you can customize this check)
+	# Check if the body is the player
 	if body.name == "Player" or body.is_in_group("player"):
 		if auto_collect:
+			# Call the player's pickup_mask function directly
+			if body.has_method("pickup_mask"):
+				# Convert this pickup's enum to player's enum
+				# Pickup enum: MASK_1=0, MASK_2=1, MASK_3=2, MASK_4=3
+				# Player enum: NONE=0, MASK_1=1, MASK_2=2, MASK_3=3, MASK_4=4
+				var player_mask_type = (mask_type as int) + 1
+				body.pickup_mask(player_mask_type)
+			
 			collect()
 
 func collect() -> void:
-	"""Collect the mask and notify listeners"""
+	"""Collect the mask and play collection animation"""
 	if is_collected:
 		return
 	
 	is_collected = true
-	
-	# Emit signal with mask type (convert enum to int)
-	mask_collected.emit(mask_type as int)
 	
 	# Play collection animation
 	play_collection_effect()
@@ -139,7 +135,7 @@ func trigger_collection() -> void:
 	"""Call this to manually trigger collection (for interaction prompts, etc.)"""
 	collect()
 
-# Optional: Method to get the mask type as the player's enum value
+# Helper function to get the mask type as the player's enum value
 func get_mask_type_for_player() -> int:
 	"""Returns the mask type in a format matching the player's MaskType enum"""
 	# Player's enum: NONE=0, MASK_1=1, MASK_2=2, MASK_3=3, MASK_4=4
