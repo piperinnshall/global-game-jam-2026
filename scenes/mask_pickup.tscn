@@ -50,6 +50,7 @@ region_enabled = true
 region_rect = Rect2(1273, 293, 200, 319)
 
 [node name="PointLight2D" type="PointLight2D" parent="SpriteContainer" unique_id=538612101]
+color = Color(1, 1, 1, 0.19215687)
 energy = 2.64
 texture = SubResource("GradientTexture2D_b8jdx")
 texture_scale = 3.81

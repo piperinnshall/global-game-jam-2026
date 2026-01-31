@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bgo2efk6ygmhu"]
+
+[ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_qlj6f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlj6f"]
+size = Vector2(54, 251)
+
+[node name="wall1" type="Node2D" unique_id=1534946682]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=215104358]
+position = Vector2(1.0000038, 18)
+scale = Vector2(1.68, 1.68)
+texture = ExtResource("1_qlj6f")
+region_enabled = true
+region_rect = Rect2(853, 375, 41, 157)
+
+[node name="s" type="StaticBody2D" parent="." unique_id=1931919906]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="s" unique_id=1600857819]
+position = Vector2(2, 18.5)
+shape = SubResource("RectangleShape2D_qlj6f")
