@@ -455,9 +455,9 @@ func apply_mask_powers(mask_type: MaskType) -> void:
 			# Shockwave mask (handled via space bar input)
 			pass
 
-# MASK 4 ABILITY: SHOCKWAVE
+# OPTIMIZED MASK 4 ABILITY: SHOCKWAVE
 func trigger_shockwave() -> void:
-	"""Trigger a shockwave attack in the facing direction"""
+	"""Trigger a simplified shockwave attack"""
 	print("Shockwave triggered!")
 	
 	# Create shockwave projectile
@@ -470,37 +470,36 @@ func trigger_shockwave() -> void:
 	if shockwave_particles:
 		shockwave_particles.emitting = true
 	
-	# Add screen shake effect (if you have a camera)
+	# Apply screen shake effect (if you have a camera)
 	apply_screen_shake()
 	
 	# Visual feedback - squash player sprite
 	target_scale = Vector2(1.3, 0.7)
 
 func create_shockwave_projectile() -> Node2D:
-	"""Create a shockwave projectile that travels forward with cool black circular effects"""
+	"""Create an optimized shockwave projectile with minimal performance impact"""
 	var shockwave = Node2D.new()
 	shockwave.name = "Shockwave"
 	
-	# Create expanding black circle rings (multiple layers for depth)
-	for i in range(3):
-		var ring = create_shockwave_ring(i)
-		shockwave.add_child(ring)
+	# Single animated ring instead of multiple layers
+	var ring = create_simple_shockwave_ring()
+	shockwave.add_child(ring)
 	
-	# Add dark energy particles
-	var dark_particles = create_dark_energy_particles()
-	shockwave.add_child(dark_particles)
+	# Add white inner ring for contrast
+	var white_ring = create_white_inner_ring()
+	shockwave.add_child(white_ring)
 	
-	# Add swirling black particles
-	var swirl_particles = create_swirl_particles()
-	shockwave.add_child(swirl_particles)
+	# Add distortion wave
+	var distortion = create_distortion_wave()
+	shockwave.add_child(distortion)
 	
-	# Add distortion wave effect
-	var distortion_sprite = create_distortion_wave()
-	shockwave.add_child(distortion_sprite)
+	# Single particle system instead of multiple
+	var particles = create_simple_shockwave_particles()
+	shockwave.add_child(particles)
 	
-	# Add trailing smoke particles
-	var smoke_particles = create_smoke_trail()
-	shockwave.add_child(smoke_particles)
+	# Add white spark particles
+	var white_particles = create_white_spark_particles()
+	shockwave.add_child(white_particles)
 	
 	# Add collision detection area
 	var area = Area2D.new()
@@ -523,22 +522,34 @@ extends Node2D
 var speed: float = %f
 var direction: int = %d
 var lifetime: float = 0.0
-var max_lifetime: float = 0.8
+var max_lifetime: float = 0.6
 var distance_traveled: float = 0.0
 var max_range: float = %f
 
 func _ready():
-	# Animate rings
-	for child in get_children():
-		if child.name.begins_with('Ring'):
-			animate_ring(child)
-
-func animate_ring(ring: Sprite2D):
-	var tween = create_tween()
-	tween.set_parallel(true)
-	var delay = float(ring.name.split('_')[1]) * 0.05
-	tween.tween_property(ring, 'scale', Vector2.ONE * 2.5, 0.4).set_delay(delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(ring, 'modulate:a', 0.0, 0.4).set_delay(delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	# Animate the black ring
+	var ring = get_node_or_null('Ring')
+	if ring:
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(ring, 'scale', Vector2.ONE * 2.0, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(ring, 'modulate:a', 0.0, 0.4)
+	
+	# Animate the white ring
+	var white_ring = get_node_or_null('WhiteRing')
+	if white_ring:
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(white_ring, 'scale', Vector2.ONE * 1.8, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(white_ring, 'modulate:a', 0.0, 0.35)
+	
+	# Animate the distortion wave
+	var distortion = get_node_or_null('DistortionWave')
+	if distortion:
+		var tween = create_tween()
+		tween.set_parallel(true)
+		tween.tween_property(distortion, 'scale', Vector2.ONE * 2.2, 0.5).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		tween.tween_property(distortion, 'modulate:a', 0.0, 0.5)
 
 func _process(delta: float) -> void:
 	lifetime += delta
@@ -548,23 +559,17 @@ func _process(delta: float) -> void:
 	position.x += direction * movement
 	distance_traveled += movement
 	
-	# Pulsating opacity
-	var pulse = 0.7 + sin(lifetime * 20.0) * 0.3
-	modulate.a = pulse * (1.0 - (lifetime / max_lifetime))
+	# Simple pulsating opacity
+	modulate.a = 0.8 * (1.0 - (lifetime / max_lifetime))
 	
-	# Rotate slightly for effect
-	rotation += delta * 5.0
-	
-	# Scale up as it travels
-	var scale_factor = 1.0 + (distance_traveled / max_range) * 0.5
-	scale = Vector2.ONE * scale_factor
+	# Pulse the distortion wave
+	var distortion = get_node_or_null('DistortionWave')
+	if distortion:
+		distortion.scale = Vector2.ONE * (1.0 + sin(lifetime * 15.0) * 0.15)
 	
 	# Destroy after max range or lifetime
 	if distance_traveled >= max_range or lifetime >= max_lifetime:
-		# Fade out effect
-		var tween = create_tween()
-		tween.tween_property(self, 'modulate:a', 0.0, 0.2)
-		tween.tween_callback(queue_free)
+		queue_free()
 """ % [shockwave_speed, facing_direction, shockwave_range]
 	
 	var script = GDScript.new()
@@ -574,105 +579,71 @@ func _process(delta: float) -> void:
 	
 	return shockwave
 
-func create_shockwave_ring(index: int) -> Sprite2D:
-	"""Create a black circular ring for the shockwave"""
+func create_simple_shockwave_ring() -> Sprite2D:
+	"""Create a single optimized black ring"""
 	var ring = Sprite2D.new()
-	ring.name = "Ring_%d" % index
+	ring.name = "Ring"
 	
-	# Create a black circle texture programmatically
-	var img = Image.create(128, 128, false, Image.FORMAT_RGBA8)
+	# Create a simple black circle texture (smaller resolution for performance)
+	var img = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
 	
-	var center = Vector2(64, 64)
-	var outer_radius = 60.0 - (index * 8.0)
-	var inner_radius = outer_radius - 12.0
+	var center = Vector2(32, 32)
+	var outer_radius = 30.0
+	var inner_radius = 22.0
 	
-	# Draw ring
-	for x in range(128):
-		for y in range(128):
+	# Draw ring with minimal pixel operations
+	for x in range(64):
+		for y in range(64):
 			var pos = Vector2(x, y)
 			var dist = pos.distance_to(center)
 			if dist < outer_radius and dist > inner_radius:
-				var alpha = 0.6 - (index * 0.15)
-				# Feathered edges
-				if dist > outer_radius - 3:
-					alpha *= (outer_radius - dist) / 3.0
-				elif dist < inner_radius + 3:
-					alpha *= (dist - inner_radius) / 3.0
+				var alpha = 0.7
+				# Simple feathering
+				if dist > outer_radius - 2:
+					alpha *= (outer_radius - dist) / 2.0
+				elif dist < inner_radius + 2:
+					alpha *= (dist - inner_radius) / 2.0
 				img.set_pixel(x, y, Color(0.05, 0.05, 0.1, alpha))
 	
 	var texture = ImageTexture.create_from_image(img)
 	ring.texture = texture
-	ring.scale = Vector2.ONE * (0.8 + index * 0.1)
-	ring.modulate = Color(1, 1, 1, 1)
+	ring.scale = Vector2.ONE * 0.8
 	
 	return ring
 
-func create_dark_energy_particles() -> GPUParticles2D:
-	"""Create dark energy particles for the shockwave core"""
-	var particles = GPUParticles2D.new()
-	particles.name = "DarkEnergy"
-	particles.amount = 30
-	particles.lifetime = 0.6
-	particles.explosiveness = 0.3
-	particles.randomness = 0.4
-	particles.local_coords = true
+func create_white_inner_ring() -> Sprite2D:
+	"""Create a white inner ring for contrast"""
+	var ring = Sprite2D.new()
+	ring.name = "WhiteRing"
 	
-	var material = ParticleProcessMaterial.new()
-	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
-	material.emission_sphere_radius = 15.0
-	material.direction = Vector3(1, 0, 0)
-	material.spread = 30.0
-	material.initial_velocity_min = 80.0
-	material.initial_velocity_max = 150.0
-	material.gravity = Vector3.ZERO
-	material.radial_accel_min = -50.0
-	material.radial_accel_max = -20.0
-	material.scale_min = 4.0
-	material.scale_max = 8.0
-	material.scale_curve = create_fade_curve()
-	material.color = Color(0.1, 0.1, 0.15, 0.9)
-	material.color_ramp = create_black_gradient()
+	# Create white ring texture
+	var img = Image.create(64, 64, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
 	
-	particles.process_material = material
-	particles.emitting = true
+	var center = Vector2(32, 32)
+	var outer_radius = 20.0
+	var inner_radius = 16.0
 	
-	return particles
-
-func create_swirl_particles() -> GPUParticles2D:
-	"""Create swirling black particles around the shockwave"""
-	var particles = GPUParticles2D.new()
-	particles.name = "Swirl"
-	particles.amount = 25
-	particles.lifetime = 0.5
-	particles.explosiveness = 0.5
-	particles.randomness = 0.6
-	particles.local_coords = true
+	# Draw white ring
+	for x in range(64):
+		for y in range(64):
+			var pos = Vector2(x, y)
+			var dist = pos.distance_to(center)
+			if dist < outer_radius and dist > inner_radius:
+				var alpha = 0.85
+				# Feathering
+				if dist > outer_radius - 2:
+					alpha *= (outer_radius - dist) / 2.0
+				elif dist < inner_radius + 2:
+					alpha *= (dist - inner_radius) / 2.0
+				img.set_pixel(x, y, Color(0.95, 0.95, 1.0, alpha))
 	
-	var material = ParticleProcessMaterial.new()
-	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_RING
-	material.emission_ring_axis = Vector3(0, 0, 1)
-	material.emission_ring_height = 1.0
-	material.emission_ring_radius = 25.0
-	material.emission_ring_inner_radius = 20.0
-	material.direction = Vector3(0, 0, 0)
-	material.spread = 180.0
-	material.initial_velocity_min = 100.0
-	material.initial_velocity_max = 200.0
-	material.angular_velocity_min = -360.0
-	material.angular_velocity_max = 360.0
-	material.orbit_velocity_min = 0.5
-	material.orbit_velocity_max = 1.0
-	material.gravity = Vector3.ZERO
-	material.scale_min = 3.0
-	material.scale_max = 6.0
-	material.color = Color(0.05, 0.05, 0.1, 0.8)
-	material.color_ramp = create_black_gradient()
+	var texture = ImageTexture.create_from_image(img)
+	ring.texture = texture
+	ring.scale = Vector2.ONE * 0.9
 	
-	particles.process_material = material
-	particles.emitting = true
-	
-	return particles
+	return ring
 
 func create_distortion_wave() -> Sprite2D:
 	"""Create a distortion wave effect sprite"""
@@ -680,86 +651,92 @@ func create_distortion_wave() -> Sprite2D:
 	sprite.name = "DistortionWave"
 	
 	# Create a gradient circle for distortion effect
-	var img = Image.create(96, 96, false, Image.FORMAT_RGBA8)
+	var img = Image.create(80, 80, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0, 0, 0, 0))
 	
-	var center = Vector2(48, 48)
-	for x in range(96):
-		for y in range(96):
+	var center = Vector2(40, 40)
+	for x in range(80):
+		for y in range(80):
 			var pos = Vector2(x, y)
 			var dist = pos.distance_to(center)
-			if dist < 45:
-				var alpha = (1.0 - dist / 45.0) * 0.4
-				var darkness = 0.1 + (dist / 45.0) * 0.1
-				img.set_pixel(x, y, Color(darkness, darkness, darkness * 1.2, alpha))
+			if dist < 38:
+				var alpha = (1.0 - dist / 38.0) * 0.35
+				# Mix of dark and light for energy effect
+				var brightness = 0.3 + (dist / 38.0) * 0.4
+				img.set_pixel(x, y, Color(brightness, brightness, brightness + 0.1, alpha))
 	
 	var texture = ImageTexture.create_from_image(img)
 	sprite.texture = texture
-	sprite.modulate = Color(0.8, 0.8, 1.0, 0.7)
+	sprite.modulate = Color(0.9, 0.9, 1.0, 0.6)
+	sprite.scale = Vector2.ONE * 0.7
 	
 	return sprite
 
-func create_smoke_trail() -> GPUParticles2D:
-	"""Create trailing smoke particles"""
+func create_simple_shockwave_particles() -> GPUParticles2D:
+	"""Create a single optimized particle system for the shockwave"""
 	var particles = GPUParticles2D.new()
-	particles.name = "SmokeTrail"
-	particles.amount = 20
-	particles.lifetime = 0.8
-	particles.explosiveness = 0.2
-	particles.randomness = 0.5
+	particles.name = "Particles"
+	particles.amount = 15  # Reduced from 30+
+	particles.lifetime = 0.4  # Shorter lifetime
+	particles.explosiveness = 0.5
 	particles.local_coords = true
 	
 	var material = ParticleProcessMaterial.new()
 	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
-	material.emission_sphere_radius = 10.0
-	material.direction = Vector3(-1, 0, 0)
-	material.spread = 25.0
-	material.initial_velocity_min = 30.0
-	material.initial_velocity_max = 60.0
-	material.gravity = Vector3(0, -20, 0)
-	material.damping_min = 20.0
-	material.damping_max = 40.0
-	material.scale_min = 5.0
-	material.scale_max = 10.0
-	material.scale_curve = create_grow_curve()
-	material.color = Color(0.08, 0.08, 0.12, 0.6)
-	material.color_ramp = create_smoke_gradient()
+	material.emission_sphere_radius = 15.0
+	material.direction = Vector3(1, 0, 0)
+	material.spread = 40.0
+	material.initial_velocity_min = 80.0
+	material.initial_velocity_max = 120.0
+	material.gravity = Vector3.ZERO
+	material.scale_min = 3.0
+	material.scale_max = 6.0
+	material.color = Color(0.15, 0.15, 0.2, 0.8)
+	
+	# Gradient with some white mixed in
+	var gradient = Gradient.new()
+	gradient.set_color(0, Color(0.8, 0.8, 0.9, 1))  # Start brighter
+	gradient.set_color(1, Color(0.05, 0.05, 0.1, 0))  # End dark
+	material.color_ramp = gradient
 	
 	particles.process_material = material
 	particles.emitting = true
 	
 	return particles
 
-func create_fade_curve() -> Curve:
-	"""Create a curve that fades out particles"""
-	var curve = Curve.new()
-	curve.add_point(Vector2(0, 1))
-	curve.add_point(Vector2(0.5, 0.8))
-	curve.add_point(Vector2(1, 0))
-	return curve
-
-func create_grow_curve() -> Curve:
-	"""Create a curve that grows particles"""
-	var curve = Curve.new()
-	curve.add_point(Vector2(0, 0.3))
-	curve.add_point(Vector2(0.3, 1))
-	curve.add_point(Vector2(1, 0.5))
-	return curve
-
-func create_black_gradient() -> Gradient:
-	"""Create a black to transparent gradient"""
+func create_white_spark_particles() -> GPUParticles2D:
+	"""Create bright white spark particles for the shockwave core"""
+	var particles = GPUParticles2D.new()
+	particles.name = "WhiteSparks"
+	particles.amount = 12
+	particles.lifetime = 0.3
+	particles.explosiveness = 0.7
+	particles.local_coords = true
+	
+	var material = ParticleProcessMaterial.new()
+	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
+	material.emission_sphere_radius = 8.0
+	material.direction = Vector3(1, 0, 0)
+	material.spread = 50.0
+	material.initial_velocity_min = 100.0
+	material.initial_velocity_max = 180.0
+	material.gravity = Vector3.ZERO
+	material.damping_min = 30.0
+	material.damping_max = 50.0
+	material.scale_min = 2.0
+	material.scale_max = 4.0
+	material.color = Color(1.0, 1.0, 1.0, 0.9)
+	
+	# White to transparent gradient
 	var gradient = Gradient.new()
-	gradient.set_color(0, Color(0.1, 0.1, 0.15, 1))
-	gradient.set_color(1, Color(0.05, 0.05, 0.1, 0))
-	return gradient
-
-func create_smoke_gradient() -> Gradient:
-	"""Create a smoke-like gradient"""
-	var gradient = Gradient.new()
-	gradient.add_point(0.0, Color(0.1, 0.1, 0.15, 0.8))
-	gradient.add_point(0.5, Color(0.08, 0.08, 0.12, 0.4))
-	gradient.add_point(1.0, Color(0.05, 0.05, 0.08, 0))
-	return gradient
+	gradient.set_color(0, Color(1.0, 1.0, 1.0, 1.0))
+	gradient.set_color(1, Color(0.9, 0.9, 1.0, 0.0))
+	material.color_ramp = gradient
+	
+	particles.process_material = material
+	particles.emitting = true
+	
+	return particles
 
 func _on_shockwave_hit(body: Node2D, shockwave: Node2D) -> void:
 	"""Called when shockwave hits a body"""
@@ -778,8 +755,8 @@ func _on_shockwave_hit(body: Node2D, shockwave: Node2D) -> void:
 		elif body is RigidBody2D:
 			body.apply_central_impulse(knockback_direction * shockwave_knockback)
 	
-	# Create impact effect
-	create_impact_effect(shockwave.global_position)
+	# Create simple impact effect
+	create_simple_impact_effect(shockwave.global_position)
 
 func _on_shockwave_hit_area(area: Area2D, shockwave: Node2D) -> void:
 	"""Called when shockwave hits an area"""
@@ -791,85 +768,66 @@ func _on_shockwave_hit_area(area: Area2D, shockwave: Node2D) -> void:
 	if parent.has_method("receive_signal"):
 		parent.receive_signal("destroy")
 	
-	# Create impact effect
-	create_impact_effect(shockwave.global_position)
+	# Create simple impact effect
+	create_simple_impact_effect(shockwave.global_position)
 
-func create_impact_effect(pos: Vector2) -> void:
-	"""Create a visual effect at impact point"""
-	# Create expanding black ring
-	var ring_container = Node2D.new()
-	ring_container.global_position = pos
-	get_parent().add_child(ring_container)
+func create_simple_impact_effect(pos: Vector2) -> void:
+	"""Create a simplified visual effect at impact point"""
+	var container = Node2D.new()
+	container.global_position = pos
+	get_parent().add_child(container)
 	
-	# Add multiple expanding rings for layered effect
-	for i in range(3):
-		var ring = Sprite2D.new()
-		
-		# Create black ring texture
-		var img = Image.create(96, 96, false, Image.FORMAT_RGBA8)
-		img.fill(Color(0, 0, 0, 0))
-		
-		var center = Vector2(48, 48)
-		var outer_radius = 44.0
-		var inner_radius = 36.0
-		
-		for x in range(96):
-			for y in range(96):
-				var pixel_pos = Vector2(x, y)
-				var dist = pixel_pos.distance_to(center)
-				if dist < outer_radius and dist > inner_radius:
-					var alpha = 0.7
-					# Feathered edges
-					if dist > outer_radius - 3:
-						alpha *= (outer_radius - dist) / 3.0
-					elif dist < inner_radius + 3:
-						alpha *= (dist - inner_radius) / 3.0
-					img.set_pixel(x, y, Color(0.05, 0.05, 0.1, alpha))
-		
-		var texture = ImageTexture.create_from_image(img)
-		ring.texture = texture
-		ring.scale = Vector2.ONE * 0.3
-		ring.modulate = Color(1, 1, 1, 1)
-		ring_container.add_child(ring)
-		
-		# Animate ring expansion
-		var tween = create_tween()
-		var delay = i * 0.05
-		tween.tween_property(ring, "scale", Vector2.ONE * 2.0, 0.4).set_delay(delay).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.parallel().tween_property(ring, "modulate:a", 0.0, 0.4).set_delay(delay)
+	# Black expanding ring
+	var black_ring = Sprite2D.new()
 	
-	# Add dark particle burst
-	var effect = GPUParticles2D.new()
-	effect.amount = 20
-	effect.lifetime = 0.5
-	effect.one_shot = true
-	effect.explosiveness = 1.0
+	var img = Image.create(48, 48, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
 	
-	var material = ParticleProcessMaterial.new()
-	material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
-	material.emission_sphere_radius = 5.0
-	material.direction = Vector3(0, -1, 0)
-	material.spread = 180.0
-	material.initial_velocity_min = 150.0
-	material.initial_velocity_max = 250.0
-	material.gravity = Vector3(0, 300, 0)
-	material.scale_min = 4.0
-	material.scale_max = 8.0
-	material.color = Color(0.1, 0.1, 0.15, 0.9)
+	var center = Vector2(24, 24)
+	var outer_radius = 22.0
+	var inner_radius = 18.0
 	
-	# Create dark gradient
-	var gradient = Gradient.new()
-	gradient.set_color(0, Color(0.1, 0.1, 0.15, 1))
-	gradient.set_color(1, Color(0.05, 0.05, 0.08, 0))
-	material.color_ramp = gradient
+	for x in range(48):
+		for y in range(48):
+			var pixel_pos = Vector2(x, y)
+			var dist = pixel_pos.distance_to(center)
+			if dist < outer_radius and dist > inner_radius:
+				img.set_pixel(x, y, Color(0.05, 0.05, 0.1, 0.7))
 	
-	effect.process_material = material
-	ring_container.add_child(effect)
-	effect.emitting = true
+	var texture = ImageTexture.create_from_image(img)
+	black_ring.texture = texture
+	black_ring.scale = Vector2.ONE * 0.3
+	container.add_child(black_ring)
 	
-	# Auto-remove after effects complete
-	await get_tree().create_timer(1.0).timeout
-	ring_container.queue_free()
+	# White flash ring
+	var white_ring = Sprite2D.new()
+	
+	var white_img = Image.create(48, 48, false, Image.FORMAT_RGBA8)
+	white_img.fill(Color(0, 0, 0, 0))
+	
+	var white_outer = 16.0
+	var white_inner = 12.0
+	
+	for x in range(48):
+		for y in range(48):
+			var pixel_pos = Vector2(x, y)
+			var dist = pixel_pos.distance_to(center)
+			if dist < white_outer and dist > white_inner:
+				white_img.set_pixel(x, y, Color(0.95, 0.95, 1.0, 0.9))
+	
+	var white_texture = ImageTexture.create_from_image(white_img)
+	white_ring.texture = white_texture
+	white_ring.scale = Vector2.ONE * 0.4
+	container.add_child(white_ring)
+	
+	# Animate both rings
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(black_ring, "scale", Vector2.ONE * 1.5, 0.3)
+	tween.tween_property(black_ring, "modulate:a", 0.0, 0.3)
+	tween.tween_property(white_ring, "scale", Vector2.ONE * 1.3, 0.25)
+	tween.tween_property(white_ring, "modulate:a", 0.0, 0.25)
+	tween.tween_callback(container.queue_free)
 
 func apply_screen_shake() -> void:
 	"""Apply screen shake effect if camera exists"""

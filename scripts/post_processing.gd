@@ -14,9 +14,9 @@ var vignette_intensity: float = 0.4
 var vignette_smoothness: float = 0.5
 var pixelation_amount: int = 2
 var scanline_intensity: float = 0.3
-var noise_intensity: float = 0.02
+var noise_intensity: float = 0.01
 var contrast: float = 1.01
-var dithering_strength: float = 0.2
+var dithering_strength: float = 0.1
 
 # Shader material
 var shader_material: ShaderMaterial
@@ -28,7 +28,12 @@ func _ready() -> void:
 
 func setup_post_processing() -> void:
 	# Get the root viewport
-	viewport = get_viewport()
+	viewport = get_tree().root
+	
+	# Create a CanvasLayer to ensure it stays on top across scene changes
+	var canvas_layer = CanvasLayer.new()
+	canvas_layer.name = "PostProcessingCanvasLayer"
+	canvas_layer.layer = 100  # High layer to render on top
 	
 	# Create a ColorRect that covers the entire screen
 	color_rect = ColorRect.new()
@@ -45,16 +50,20 @@ func setup_post_processing() -> void:
 	
 	color_rect.material = shader_material
 	
-	# Add to the scene tree at the root level (rendered on top)
-	get_tree().root.add_child.call_deferred(color_rect)
+	# Add ColorRect to CanvasLayer
+	canvas_layer.add_child(color_rect)
+	
+	# Add CanvasLayer directly to root (NOT to current scene)
+	# This ensures it persists across scene changes
+	get_tree().root.call_deferred("add_child", canvas_layer)
 	
 	# Connect to viewport size changes
-	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	get_tree().root.size_changed.connect(_on_viewport_size_changed)
 	_on_viewport_size_changed()
 
 func _on_viewport_size_changed() -> void:
 	if color_rect:
-		color_rect.size = get_viewport().get_visible_rect().size
+		color_rect.size = get_tree().root.get_visible_rect().size
 		color_rect.position = Vector2.ZERO
 		update_shader_parameters()
 
@@ -62,7 +71,7 @@ func update_shader_parameters() -> void:
 	if not shader_material:
 		return
 	
-	var screen_size = get_viewport().get_visible_rect().size
+	var screen_size = get_tree().root.get_visible_rect().size
 	
 	shader_material.set_shader_parameter("bloom_intensity", bloom_intensity)
 	shader_material.set_shader_parameter("bloom_threshold", bloom_threshold)
