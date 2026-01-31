@@ -18,6 +18,10 @@ config/name="global-game-jam-2026"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PostProcessing="*uid://bsqvcsanvtd6h"
+
 [dotnet]
 
 project/assembly_name="global-game-jam-2026"
