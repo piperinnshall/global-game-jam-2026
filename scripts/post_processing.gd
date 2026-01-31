@@ -16,7 +16,8 @@ var pixelation_amount: int = 2
 var scanline_intensity: float = 0.3
 var noise_intensity: float = 0.01
 var contrast: float = 0.8
-var dithering_strength: float = 0.1
+var dithering_strength: float = 0.4
+var color_depth: int = 8  # Number of color levels per channel (lower = more visible dithering)
 
 # Shader material
 var shader_material: ShaderMaterial
@@ -83,6 +84,7 @@ func update_shader_parameters() -> void:
 	shader_material.set_shader_parameter("noise_intensity", noise_intensity)
 	shader_material.set_shader_parameter("contrast", contrast)
 	shader_material.set_shader_parameter("dithering_strength", dithering_strength)
+	shader_material.set_shader_parameter("color_depth", color_depth)
 	shader_material.set_shader_parameter("screen_size", screen_size)
 
 # Setters for runtime adjustment
@@ -116,6 +118,25 @@ func set_contrast(value: float) -> void:
 	contrast = value
 	update_shader_parameters()
 
-func set_dithering(strength: float) -> void:
-	dithering_strength = strength
+func set_dithering(strength: float, depth: int = 8) -> void:
+	"""
+	Set dithering parameters.
+	strength: 0.0 to 1.0 (how strong the dithering effect is)
+	depth: 2 to 256 (number of color levels per channel - lower = more retro look)
+	       Try 4-8 for strong retro effect, 16-32 for subtle effect
+	"""
+	dithering_strength = clamp(strength, 0.0, 1.0)
+	color_depth = clamp(depth, 2, 256)
+	update_shader_parameters()
+
+func set_color_depth(depth: int) -> void:
+	"""
+	Set the color depth (number of levels per channel).
+	Lower values = more visible dithering and retro look
+	2 = extreme posterization
+	4-8 = strong retro dithering
+	16-32 = subtle dithering
+	256 = full color range
+	"""
+	color_depth = clamp(depth, 2, 256)
 	update_shader_parameters()

@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var air_acceleration: float = 500.0
 
 # Bounce/Animation parameters
-@export var walk_bob_speed: float = 18.0
+@export var walk_bob_speed: float = 24.0
 @export var walk_bob_amount: float = 0.15
 @export var walk_rotation_amount: float = 10.0  # Degrees of rotation while walking
 @export var flip_duration: float = 0.15  # Duration of flip animation
@@ -177,6 +177,14 @@ func _physics_process(delta: float) -> void:
 	var was_on_floor_before = is_on_floor()
 	move_and_slide()
 	
+	# Apply platform movement if standing on a moving platform
+	if is_on_floor():
+		var platform = get_platform_below()
+		if platform and platform.has_method("get_platform_velocity"):
+			var platform_velocity = platform.get_platform_velocity()
+			# Move the player with the platform
+			position += platform_velocity * delta
+	
 	# Handle landing squash and particles
 	if is_on_floor() and not was_on_floor_before:
 		target_scale = land_squash
@@ -204,6 +212,21 @@ func _physics_process(delta: float) -> void:
 	# Update sprite facing (only if not flipping)
 	if not is_flipping:
 		sprite_container.scale.x = facing_direction * abs(sprite_container.scale.x)
+
+func get_platform_below() -> Node2D:
+	"""Get the platform the player is standing on, if any"""
+	# Check what we're colliding with
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		# Check if it's a platform (you can also check for a group)
+		if collider and (collider.is_in_group("platforms") or collider.has_method("get_platform_velocity")):
+			# Make sure we're on top of it (normal pointing up)
+			if collision.get_normal().y < -0.5:  # Normal pointing mostly upward
+				return collider
+	
+	return null
 
 func update_visual_effects(delta: float, input_dir: float) -> void:
 	# Walking bob animation with rotation
@@ -347,6 +370,7 @@ func detect_double_tap(delta: float) -> void:
 		last_right_tap_time = current_time
 
 func start_dash(direction: Vector2) -> void:
+	$Dashsound.play()
 	"""Initiate a dash"""
 	is_dashing = true
 	dash_direction = direction
@@ -418,6 +442,7 @@ func create_afterimage() -> void:
 	tween.tween_callback(afterimage.queue_free)
 
 func emit_double_jump_effect() -> void:
+	$JumpSound.play()
 	"""Emit special particles for double jump"""
 	if double_jump_effect:
 		double_jump_effect.restart()
@@ -580,6 +605,7 @@ func _process(delta: float) -> void:
 	return shockwave
 
 func create_simple_shockwave_ring() -> Sprite2D:
+	$ShockwaveSound.play()
 	"""Create a single optimized black ring"""
 	var ring = Sprite2D.new()
 	ring.name = "Ring"
@@ -837,6 +863,7 @@ func apply_screen_shake() -> void:
 
 # Particle emission functions
 func emit_jump_particles() -> void:
+	$JumpSound.play()
 	"""Emit particles when jumping"""
 	if jump_particles:
 		var material = jump_particles.process_material as ParticleProcessMaterial
@@ -848,6 +875,7 @@ func emit_jump_particles() -> void:
 		jump_particles.restart()
 
 func emit_land_particles() -> void:
+	$LandSound.play()
 	"""Emit particles when landing"""
 	if land_particles:
 		var material = land_particles.process_material as ParticleProcessMaterial
@@ -872,5 +900,7 @@ func emit_walk_particles() -> void:
 		# Set particle direction to go opposite of movement
 		var material = walk_particles.process_material as ParticleProcessMaterial
 		if material:
+			$LandSound.play()
+
 			material.direction = Vector3(-facing_direction, -0.3, 0)
 		walk_particles.restart()

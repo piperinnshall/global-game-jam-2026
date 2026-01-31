@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dashwall001"]
+
+[ext_resource type="Script" uid="uid://bgpnq6qmytbuc" path="res://dash_through_wall.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://da8jr478jxqsm" path="res://Laser.png" id="2_wfl73"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(32, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detector"]
+size = Vector2(64, 160)
+
+[node name="DashThroughWall" type="StaticBody2D" unique_id=1876965036]
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=247262875]
+position = Vector2(-1, 1)
+scale = Vector2(0.7112676, 0.7112676)
+texture = ExtResource("2_wfl73")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2060501239]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="VisualRect" type="ColorRect" parent="." unique_id=366678710]
+visible = false
+offset_left = -16.0
+offset_top = -64.0
+offset_right = 16.0
+offset_bottom = 64.0
+color = Color(0.9372549, 0.9372549, 0.9372549, 0.07450981)
+
+[node name="DashDetector" type="Area2D" parent="." unique_id=603317592]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DashDetector" unique_id=1758639485]
+shape = SubResource("RectangleShape2D_detector")
+
+[node name="ShimmerParticles" type="GPUParticles2D" parent="." unique_id=778507744]
+amount = 20
+lifetime = 2.0
+preprocess = 1.0
