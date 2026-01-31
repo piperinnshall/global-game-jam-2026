@@ -95,6 +95,15 @@ scale_min = 4.0
 scale_max = 9.0
 color = Color(1, 0.8, 0.3, 1)
 
+[sub_resource type="Gradient" id="Gradient_n0u6w"]
+offsets = PackedFloat32Array(0, 0.78313255)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g2els"]
+gradient = SubResource("Gradient_n0u6w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="CharacterBody2D" unique_id=291978468]
 script = ExtResource("1_g2els")
 
@@ -121,15 +130,17 @@ region_rect = Rect2(705, 270, 247, 397)
 
 [node name="Mask3Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=2014092039]
 visible = false
+position = Vector2(4, -57)
 texture = ExtResource("2_sprite")
 region_enabled = true
-region_rect = Rect2(394, 301, 284, 365)
+region_rect = Rect2(996, 302, 246, 365)
 
 [node name="Mask4Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1113622645]
 visible = false
+position = Vector2(-3, -63)
 texture = ExtResource("2_sprite")
 region_enabled = true
-region_rect = Rect2(394, 301, 284, 365)
+region_rect = Rect2(1273, 293, 219, 371)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836327837]
 position = Vector2(3, -12)
@@ -193,3 +204,8 @@ amount = 15
 lifetime = 0.4
 explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_dash")
+
+[node name="Mask3Light" type="PointLight2D" parent="." unique_id=516039842]
+energy = 2.64
+texture = SubResource("GradientTexture2D_g2els")
+texture_scale = 14.08
