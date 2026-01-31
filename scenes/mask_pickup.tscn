@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bymt7cwwjummy"]
+
+[ext_resource type="Script" uid="uid://ddefuj2olhvkg" path="res://scripts/maskpickup.gd" id="1_mask_pickup"]
+[ext_resource type="Texture2D" uid="uid://xj8l7rp74gfi" path="res://masks.png" id="2_n0u6w"]
+
+[sub_resource type="Gradient" id="Gradient_n0u6w"]
+offsets = PackedFloat32Array(0, 0.78313255)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b8jdx"]
+gradient = SubResource("Gradient_n0u6w")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pickup"]
+radius = 40.0
+
+[node name="MaskPickup" type="Area2D" unique_id=2082499342]
+collision_layer = 8
+script = ExtResource("1_mask_pickup")
+
+[node name="SpriteContainer" type="Node2D" parent="." unique_id=1404291441]
+
+[node name="Mask1Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=261577678]
+position = Vector2(0.07991791, -11.000095)
+scale = Vector2(0.23999941, 0.23999941)
+texture = ExtResource("2_n0u6w")
+region_enabled = true
+region_rect = Rect2(394, 301, 284, 296)
+
+[node name="Mask2Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1649885622]
+position = Vector2(0.07991791, -11.000095)
+scale = Vector2(0.23999941, 0.23999941)
+texture = ExtResource("2_n0u6w")
+region_enabled = true
+region_rect = Rect2(736, 270, 178, 325)
+
+[node name="Mask3Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1586977443]
+position = Vector2(0.07991791, -11.000095)
+scale = Vector2(0.23999941, 0.23999941)
+texture = ExtResource("2_n0u6w")
+region_enabled = true
+region_rect = Rect2(1028, 302, 178, 290)
+
+[node name="Mask4Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1494906302]
+position = Vector2(0.07991791, -11.000095)
+scale = Vector2(0.23999941, 0.23999941)
+texture = ExtResource("2_n0u6w")
+region_enabled = true
+region_rect = Rect2(1273, 293, 200, 319)
+
+[node name="PointLight2D" type="PointLight2D" parent="SpriteContainer" unique_id=538612101]
+energy = 2.64
+texture = SubResource("GradientTexture2D_b8jdx")
+texture_scale = 3.81
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1519811866]
+shape = SubResource("CircleShape2D_pickup")
+
+[node name="AnimationTimer" type="Timer" parent="." unique_id=1187631213]
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

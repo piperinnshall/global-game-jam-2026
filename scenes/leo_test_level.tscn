@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://buspm1155yp47" path="res://icon.svg" id="1_a8p6y"]
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="2_b17tg"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="3_ugxxg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b17tg"]
 size = Vector2(527, 45)
@@ -21,4 +22,7 @@ texture = ExtResource("1_a8p6y")
 
 [node name="Player" parent="." unique_id=543079533 instance=ExtResource("2_b17tg")]
 position = Vector2(375, 0)
-scale = Vector2(0.27999997, 0.27999997)
+scale = Vector2(0.235, 0.235)
+
+[node name="MaskPickup" parent="." unique_id=2082499342 instance=ExtResource("3_ugxxg")]
+position = Vector2(625, 445)

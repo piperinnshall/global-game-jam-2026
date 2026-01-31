@@ -13,9 +13,9 @@ extends CharacterBody2D
 @export var walk_rotation_amount: float = 10.0  # Degrees of rotation while walking
 @export var flip_duration: float = 0.15  # Duration of flip animation
 @export var flip_scale_amount: float = 0.3  # How much to squash during flip
-@export var jump_squash: Vector2 = Vector2(1.3, 0.7)
-@export var jump_stretch: Vector2 = Vector2(0.7, 1.3)
-@export var land_squash: Vector2 = Vector2(1.4, 0.6)
+@export var jump_squash: Vector2 = Vector2(1.15, 0.75)
+@export var jump_stretch: Vector2 = Vector2(0.75, 1.15)
+@export var land_squash: Vector2 = Vector2(1.7, 0.3)
 @export var bounce_back_speed: float = 10.0
 
 # Particle parameters
@@ -24,6 +24,8 @@ extends CharacterBody2D
 # Mask system
 enum MaskType { NONE, MASK_1, MASK_2, MASK_3, MASK_4 }
 var current_mask: MaskType = MaskType.NONE
+var mask_switch_cooldown: float = 0.0
+var mask_switch_cooldown_time: float = 0.3  # Cooldown between mask switches
 
 # Internal state
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -37,27 +39,89 @@ var flip_timer: float = 0.0
 var target_rotation: float = 0.0
 var walk_particle_timer: float = 0.0
 
+# Mask ability state
+var jumps_remaining: int = 1
+var max_jumps: int = 1
+var is_dashing: bool = false
+var dash_direction: Vector2 = Vector2.ZERO
+var dash_timer: float = 0.0
+var dash_duration: float = 0.2
+var dash_speed: float = 600.0
+var dash_cooldown: float = 0.0
+var dash_cooldown_time: float = 0.5
+
+# Double tap detection for dash
+var last_left_tap_time: float = -1.0
+var last_right_tap_time: float = -1.0
+var double_tap_window: float = 0.3  # Time window for double tap
+
 # References (set in _ready)
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var mask_sprite: Sprite2D = $Sprite2D/MaskSprite
+@onready var sprite_container: Node2D = $SpriteContainer
+@onready var player_sprite: Sprite2D = $SpriteContainer/PlayerSprite
+@onready var mask_1_sprite: Sprite2D = $SpriteContainer/Mask1Sprite
+@onready var mask_2_sprite: Sprite2D = $SpriteContainer/Mask2Sprite
+@onready var mask_3_sprite: Sprite2D = $SpriteContainer/Mask3Sprite
+@onready var mask_4_sprite: Sprite2D = $SpriteContainer/Mask4Sprite
 @onready var jump_particles: GPUParticles2D = $JumpParticles
 @onready var land_particles: GPUParticles2D = $LandParticles
 @onready var walk_particles: GPUParticles2D = $WalkParticles
 @onready var jump_trail: GPUParticles2D = $JumpTrail
+@onready var double_jump_effect: GPUParticles2D = $DoubleJumpEffect
+@onready var dash_particles: GPUParticles2D = $DashParticles
 
 func _ready():
 	# Set initial scale and facing
-	sprite.scale = Vector2.ONE
-	mask_sprite.visible = false
+	sprite_container.scale = Vector2.ONE
 	facing_direction = 1  # Start facing right
+	
+	# Hide all mask sprites initially
+	if player_sprite:
+		player_sprite.visible = true
+	if mask_1_sprite:
+		mask_1_sprite.visible = false
+	if mask_2_sprite:
+		mask_2_sprite.visible = false
+	if mask_3_sprite:
+		mask_3_sprite.visible = false
+	if mask_4_sprite:
+		mask_4_sprite.visible = false
 
 func _physics_process(delta: float) -> void:
+	# Update mask switch cooldown
+	if mask_switch_cooldown > 0:
+		mask_switch_cooldown -= delta
+	
+	# Handle mask switching with F key (with cooldown)
+	if Input.is_key_pressed(KEY_F) and mask_switch_cooldown <= 0:
+		cycle_mask()
+		mask_switch_cooldown = mask_switch_cooldown_time
+	
+	# Update dash cooldown
+	if dash_cooldown > 0:
+		dash_cooldown -= delta
+	
+	# Handle dashing
+	if is_dashing:
+		handle_dash(delta)
+		return  # Skip normal movement while dashing
+	
 	# Handle gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	else:
+		# Reset jumps when on floor
+		jumps_remaining = max_jumps
 	
-	# Get input direction
-	var input_dir = Input.get_axis("left", "right")
+	# Get input direction - using built-in Godot actions
+	var input_dir = 0.0
+	if Input.is_action_pressed("left"):
+		input_dir -= 1.0
+	if Input.is_action_pressed("right"):
+		input_dir += 1.0
+	
+	# Detect double tap for dash (only if wearing dash mask)
+	if current_mask == MaskType.MASK_2 and not is_dashing and dash_cooldown <= 0:
+		detect_double_tap(delta)
 	
 	# Check for direction change and trigger flip
 	if input_dir > 0 and facing_direction < 0:
@@ -67,12 +131,19 @@ func _physics_process(delta: float) -> void:
 		start_flip()
 		facing_direction = -1
 	
-	# Handle jump
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	# Handle jump (with double jump support)
+	if Input.is_action_just_pressed("ui_accept") and jumps_remaining > 0:
 		velocity.y = jump_velocity
+		jumps_remaining -= 1
 		target_scale = jump_stretch  # Stretch when jumping
-		emit_jump_particles()  # Trigger jump particles
-		jump_trail.emitting = true  # Start jump trail
+		
+		# Different effects based on jump type
+		if jumps_remaining == max_jumps - 1:  # First jump
+			emit_jump_particles()
+			if jump_trail:
+				jump_trail.emitting = true
+		else:  # Double jump
+			emit_double_jump_effect()
 	
 	# Apply horizontal movement with acceleration
 	if is_on_floor():
@@ -93,7 +164,8 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and not was_on_floor_before:
 		target_scale = land_squash
 		emit_land_particles()  # Trigger landing particles
-		jump_trail.emitting = false  # Stop jump trail
+		if jump_trail:
+			jump_trail.emitting = false  # Stop jump trail
 	
 	# Handle walking particles
 	if is_on_floor() and abs(velocity.x) > 10:
@@ -105,7 +177,7 @@ func _physics_process(delta: float) -> void:
 		walk_particle_timer = 0
 	
 	# Stop jump trail if on ground
-	if is_on_floor():
+	if is_on_floor() and jump_trail:
 		jump_trail.emitting = false
 	
 	# Update animations
@@ -114,14 +186,14 @@ func _physics_process(delta: float) -> void:
 	
 	# Update sprite facing (only if not flipping)
 	if not is_flipping:
-		sprite.flip_h = facing_direction < 0
+		sprite_container.scale.x = facing_direction * abs(sprite_container.scale.x)
 
 func update_visual_effects(delta: float, input_dir: float) -> void:
 	# Walking bob animation with rotation
 	if is_on_floor() and abs(velocity.x) > 10:
 		walk_time += delta * walk_bob_speed
 		bob_offset = sin(walk_time) * walk_bob_amount
-		sprite.position.y = bob_offset * 10
+		sprite_container.position.y = bob_offset * 10
 		
 		# Add rotation that syncs with the bob
 		target_rotation = sin(walk_time) * walk_rotation_amount * facing_direction
@@ -132,7 +204,7 @@ func update_visual_effects(delta: float, input_dir: float) -> void:
 		target_scale = Vector2(walk_scale_x, walk_scale_y)
 	else:
 		walk_time = 0.0
-		sprite.position.y = move_toward(sprite.position.y, 0, delta * 100)
+		sprite_container.position.y = move_toward(sprite_container.position.y, 0, delta * 100)
 		target_rotation = 0.0  # Return to neutral rotation when not walking
 	
 	# In-air squash and stretch
@@ -152,8 +224,10 @@ func update_visual_effects(delta: float, input_dir: float) -> void:
 	
 	# Smoothly interpolate scale and rotation (unless flipping)
 	if not is_flipping:
-		sprite.scale = sprite.scale.lerp(target_scale, delta * bounce_back_speed)
-		sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation, delta * bounce_back_speed)
+		var current_scale = sprite_container.scale
+		var new_scale = current_scale.lerp(target_scale * Vector2(sign(current_scale.x), 1), delta * bounce_back_speed)
+		sprite_container.scale = new_scale
+		sprite_container.rotation_degrees = lerp(sprite_container.rotation_degrees, target_rotation, delta * bounce_back_speed)
 
 func start_flip() -> void:
 	"""Initiate the flip animation when changing direction"""
@@ -171,32 +245,151 @@ func update_flip_animation(delta: float) -> void:
 	if progress >= 1.0:
 		# Flip complete
 		is_flipping = false
-		sprite.scale.x = abs(sprite.scale.x)  # Ensure proper scale
+		sprite_container.scale.x = facing_direction * abs(sprite_container.scale.x)
 		return
 	
 	# Create a squash effect during flip using a sine wave
 	var flip_squash = 1.0 - (sin(progress * PI) * flip_scale_amount)
 	
 	# Apply the squash to x scale while maintaining y scale from other animations
-	var current_y_scale = sprite.scale.y
-	sprite.scale = Vector2(flip_squash, current_y_scale)
+	var current_y_scale = abs(sprite_container.scale.y)
+	sprite_container.scale = Vector2(facing_direction * flip_squash, current_y_scale)
+
+func cycle_mask() -> void:
+	"""Cycle through available masks"""
+	var next_mask = (current_mask + 1) % 5  # Cycle through 0-4
+	equip_mask(next_mask as MaskType)
+	print("Switched to mask: ", current_mask)
+
+func detect_double_tap(delta: float) -> void:
+	"""Detect double tap for dash"""
+	var current_time = Time.get_ticks_msec() / 1000.0
 	
-	# Halfway through, actually flip the sprite
-	if progress >= 0.5 and progress < 0.5 + delta / flip_duration:
-		sprite.flip_h = facing_direction < 0
+	# Check for left double tap
+	if Input.is_action_just_pressed("left"):
+		if current_time - last_left_tap_time < double_tap_window:
+			start_dash(Vector2.LEFT)
+		last_left_tap_time = current_time
+	
+	# Check for right double tap
+	if Input.is_action_just_pressed("right"):
+		if current_time - last_right_tap_time < double_tap_window:
+			start_dash(Vector2.RIGHT)
+		last_right_tap_time = current_time
+
+func start_dash(direction: Vector2) -> void:
+	"""Initiate a dash"""
+	is_dashing = true
+	dash_direction = direction
+	dash_timer = dash_duration
+	velocity = dash_direction * dash_speed
+	dash_cooldown = dash_cooldown_time
+	
+	# Visual effects
+	if dash_particles:
+		dash_particles.emitting = true
+	
+	# Start creating afterimages
+	create_afterimage()
+
+func handle_dash(delta: float) -> void:
+	"""Handle dash movement and effects"""
+	dash_timer -= delta
+	
+	# Maintain dash velocity
+	velocity = dash_direction * dash_speed
+	
+	# Create afterimages during dash
+	if int(dash_timer * 60) % 3 == 0:  # Every 3 frames
+		create_afterimage()
+	
+	move_and_slide()
+	
+	# End dash
+	if dash_timer <= 0:
+		is_dashing = false
+		if dash_particles:
+			dash_particles.emitting = false
+		velocity.x *= 0.5  # Slow down after dash
+
+func create_afterimage() -> void:
+	"""Create an afterimage sprite"""
+	# Determine which sprite is currently visible
+	var source_sprite: Sprite2D = null
+	if player_sprite and player_sprite.visible:
+		source_sprite = player_sprite
+	elif mask_1_sprite and mask_1_sprite.visible:
+		source_sprite = mask_1_sprite
+	elif mask_2_sprite and mask_2_sprite.visible:
+		source_sprite = mask_2_sprite
+	elif mask_3_sprite and mask_3_sprite.visible:
+		source_sprite = mask_3_sprite
+	elif mask_4_sprite and mask_4_sprite.visible:
+		source_sprite = mask_4_sprite
+	
+	if not source_sprite:
+		return
+	
+	var afterimage = Sprite2D.new()
+	afterimage.texture = source_sprite.texture
+	afterimage.region_enabled = source_sprite.region_enabled
+	afterimage.region_rect = source_sprite.region_rect
+	# Combine player's base scale with sprite_container's animation scale
+	afterimage.scale = sprite_container.scale * scale
+	afterimage.rotation = sprite_container.rotation + rotation
+	afterimage.modulate = Color(1, 1, 1, 0.5)
+	
+	# Position relative to world
+	get_parent().add_child(afterimage)
+	afterimage.global_position = source_sprite.global_position
+	
+	# Fade out and remove
+	var tween = create_tween()
+	tween.tween_property(afterimage, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(afterimage.queue_free)
+
+func emit_double_jump_effect() -> void:
+	"""Emit special particles for double jump"""
+	if double_jump_effect:
+		double_jump_effect.restart()
+	if jump_trail:
+		jump_trail.emitting = true
 
 func equip_mask(mask_type: MaskType) -> void:
 	"""Equip a specific mask and show it on the character"""
 	current_mask = mask_type
 	
-	if mask_type == MaskType.NONE:
-		mask_sprite.visible = false
-	else:
-		mask_sprite.visible = true
-		# Set the frame based on mask type (frames 1-4 in sprite sheet)
-		mask_sprite.frame = int(mask_type)
-		
-	# Here  can add mask-specific power initialization
+	# Hide all mask sprites first
+	if player_sprite:
+		player_sprite.visible = false
+	if mask_1_sprite:
+		mask_1_sprite.visible = false
+	if mask_2_sprite:
+		mask_2_sprite.visible = false
+	if mask_3_sprite:
+		mask_3_sprite.visible = false
+	if mask_4_sprite:
+		mask_4_sprite.visible = false
+	
+	# Show the appropriate sprite
+	match mask_type:
+		MaskType.NONE:
+			if player_sprite:
+				player_sprite.visible = true
+		MaskType.MASK_1:
+			if mask_1_sprite:
+				mask_1_sprite.visible = true
+		MaskType.MASK_2:
+			if mask_2_sprite:
+				mask_2_sprite.visible = true
+		MaskType.MASK_3:
+			if mask_3_sprite:
+				mask_3_sprite.visible = true
+		MaskType.MASK_4:
+			if mask_4_sprite:
+				mask_4_sprite.visible = true
+	
+	# Apply mask-specific powers
 	apply_mask_powers(mask_type)
 
 func remove_mask() -> void:
@@ -205,17 +398,22 @@ func remove_mask() -> void:
 
 func apply_mask_powers(mask_type: MaskType) -> void:
 	"""Apply the special powers of the equipped mask"""
-	# Reset any previous mask powers here
+	# Reset all powers to base
+	max_jumps = 1
+	jumps_remaining = 1
+	is_dashing = false
+	dash_cooldown = 0
 	
 	match mask_type:
 		MaskType.NONE:
 			# Base character - no special powers
 			pass
 		MaskType.MASK_1:
-			# TODO: Implement Mask 1 powers (e.g., double jump)
-			pass
+			# Double jump mask
+			max_jumps = 2
+			jumps_remaining = 2 if is_on_floor() else 1
 		MaskType.MASK_2:
-			# TODO: Implement Mask 2 powers (e.g., dash)
+			# Dash mask (handled via double tap detection)
 			pass
 		MaskType.MASK_3:
 			# TODO: Implement Mask 3 powers (e.g., wall climb)
