@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://ol3umxipdt1d"]
+
+[ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_xa7n4"]
+[ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="2_bo4dx"]
+[ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="3_76toy"]
+[ext_resource type="PackedScene" uid="uid://bgo2efk6ygmhu" path="res://scenes/wall_1.tscn" id="4_8g4ke"]
+[ext_resource type="PackedScene" uid="uid://cefhcmwm3xxl4" path="res://scenes/tree.tscn" id="5_56gwk"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="6_ve5ok"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="7_cleqw"]
+[ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="8_wvb8j"]
+[ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_g8vcy"]
+
+[node name="level2" type="Node2D" unique_id=201388534]
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=555821195]
+offset_left = -120.0
+offset_top = -27.0
+offset_right = 1212.0
+offset_bottom = 745.0
+color = Color(0.39308554, 0.39308548, 0.39308557, 1)
+
+[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_xa7n4")]
+position = Vector2(-15, 398)
+
+[node name="platform7" parent="." unique_id=1248724014 instance=ExtResource("1_xa7n4")]
+position = Vector2(918, 230)
+
+[node name="platform2" parent="." unique_id=930743751 instance=ExtResource("2_bo4dx")]
+position = Vector2(298, 398)
+
+[node name="platform5" parent="." unique_id=738167066 instance=ExtResource("2_bo4dx")]
+position = Vector2(659, 328)
+scale = Vector2(-0.695, 0.755)
+
+[node name="platform13" parent="." unique_id=915902365 instance=ExtResource("2_bo4dx")]
+position = Vector2(555.00006, 577)
+scale = Vector2(-0.695, 0.755)
+
+[node name="platform3" parent="." unique_id=429574875 instance=ExtResource("3_76toy")]
+position = Vector2(133, 203)
+
+[node name="platform6" parent="." unique_id=1765181696 instance=ExtResource("3_76toy")]
+position = Vector2(605, 163)
+scale = Vector2(0.8, 0.69)
+
+[node name="wall1" parent="." unique_id=1534946682 instance=ExtResource("4_8g4ke")]
+position = Vector2(259, 528)
+
+[node name="tree" parent="." unique_id=511538616 instance=ExtResource("5_56gwk")]
+position = Vector2(1013, 640)
+
+[node name="platform4" parent="." unique_id=1604225667 instance=ExtResource("1_xa7n4")]
+position = Vector2(396, 268)
+scale = Vector2(0.315, 0.405)
+
+[node name="platform8" parent="." unique_id=1008579988 instance=ExtResource("1_xa7n4")]
+position = Vector2(837.00006, 594.99994)
+scale = Vector2(0.355, 0.45)
+
+[node name="platform9" parent="." unique_id=1135309660 instance=ExtResource("1_xa7n4")]
+position = Vector2(778, 572)
+scale = Vector2(-0.305, 0.39)
+
+[node name="platform10" parent="." unique_id=1819957346 instance=ExtResource("1_xa7n4")]
+position = Vector2(654, 527)
+scale = Vector2(0.38, 0.56)
+
+[node name="platform11" parent="." unique_id=343512963 instance=ExtResource("1_xa7n4")]
+position = Vector2(563, 489)
+scale = Vector2(0.315, 0.535)
+
+[node name="platform12" parent="." unique_id=315679455 instance=ExtResource("1_xa7n4")]
+position = Vector2(431, 446.00003)
+scale = Vector2(0.525, 0.93)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1279909957]
+offset_left = 242.0
+offset_top = 423.0
+offset_right = 456.0
+offset_bottom = 726.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=1129978364]
+offset_left = 372.0
+offset_top = 591.0
+offset_right = 605.0
+offset_bottom = 894.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=2080103520]
+offset_left = -271.0
+offset_top = 416.0
+offset_right = 146.0
+offset_bottom = 719.0
+color = Color(0, 0, 0, 1)
+
+[node name="MaskPickup" parent="." unique_id=2082499342 instance=ExtResource("6_ve5ok")]
+position = Vector2(192, 129)
+mask_type = 1
+
+[node name="Player" parent="." unique_id=291978468 instance=ExtResource("7_cleqw")]
+position = Vector2(82, 333)
+scale = Vector2(0.23999876, 0.23999876)
+
+[node name="wall2" parent="." unique_id=292770186 instance=ExtResource("8_wvb8j")]
+position = Vector2(-20, 483)
+
+[node name="wall4" parent="." unique_id=2119728612 instance=ExtResource("8_wvb8j")]
+position = Vector2(-21, 235)
+
+[node name="wall3" parent="." unique_id=1129883832 instance=ExtResource("9_g8vcy")]
+position = Vector2(135, 517)
+
+[node name="wall6" parent="." unique_id=544232709 instance=ExtResource("9_g8vcy")]
+position = Vector2(574, 696)
+
+[node name="wall5" parent="." unique_id=1839151726 instance=ExtResource("8_wvb8j")]
+position = Vector2(442, 532)

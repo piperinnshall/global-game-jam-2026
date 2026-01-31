@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://daayyvoeq7x1u" path="res://player_spritesheet.png" id="2_sprite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(310, 262)
+size = Vector2(193, 191)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jump"]
 particle_flag_disable_z = true
@@ -110,12 +110,14 @@ script = ExtResource("1_g2els")
 [node name="SpriteContainer" type="Node2D" parent="." unique_id=384434800]
 
 [node name="PlayerSprite" type="Sprite2D" parent="SpriteContainer" unique_id=116431480]
+z_index = 1
 texture = ExtResource("2_sprite")
 region_enabled = true
 region_rect = Rect2(70, 387, 306, 271)
 
 [node name="Mask1Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=535516311]
 visible = false
+z_index = 1
 position = Vector2(6, -60)
 texture = ExtResource("2_sprite")
 region_enabled = true
@@ -123,6 +125,7 @@ region_rect = Rect2(394, 301, 284, 365)
 
 [node name="Mask2Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1506178439]
 visible = false
+z_index = 1
 position = Vector2(11, -73)
 texture = ExtResource("2_sprite")
 region_enabled = true
@@ -130,6 +133,7 @@ region_rect = Rect2(705, 270, 247, 397)
 
 [node name="Mask3Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=2014092039]
 visible = false
+z_index = 1
 position = Vector2(4, -57)
 texture = ExtResource("2_sprite")
 region_enabled = true
@@ -137,13 +141,14 @@ region_rect = Rect2(996, 302, 246, 365)
 
 [node name="Mask4Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1113622645]
 visible = false
+z_index = 1
 position = Vector2(-3, -63)
 texture = ExtResource("2_sprite")
 region_enabled = true
 region_rect = Rect2(1273, 293, 219, 371)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836327837]
-position = Vector2(3, -12)
+position = Vector2(0.5, 23.5)
 shape = SubResource("RectangleShape2D_1")
 
 [node name="JumpParticles" type="GPUParticles2D" parent="." unique_id=1022448910]
@@ -206,6 +211,6 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_dash")
 
 [node name="Mask3Light" type="PointLight2D" parent="." unique_id=516039842]
-energy = 2.64
+energy = 8.47
 texture = SubResource("GradientTexture2D_g2els")
-texture_scale = 14.08
+texture_scale = 25.29
