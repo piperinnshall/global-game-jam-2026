@@ -1,16 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cefhcmwm3xxl4"]
+[gd_scene load_steps=4 format=3 uid="uid://ojs5t0mnrg78"]
 
-[ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_avsvi"]
+[ext_resource type="Script" uid="uid://dtu1brlkexnps" path="res://scripts/moving.gd" id="1_du00b"]
+[ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_eupwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vplca"]
 size = Vector2(232, 47)
 
-[node name="tree" type="Node2D"]
+[node name="moving" type="Node2D"]
+script = ExtResource("1_du00b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(25, -143)
 scale = Vector2(1.565, 1.565)
-texture = ExtResource("1_avsvi")
+texture = ExtResource("1_eupwt")
 region_enabled = true
 region_rect = Rect2(621, 300, 197, 239)
 

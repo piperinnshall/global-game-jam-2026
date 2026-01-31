@@ -15,7 +15,7 @@ var vignette_smoothness: float = 0.5
 var pixelation_amount: int = 2
 var scanline_intensity: float = 0.3
 var noise_intensity: float = 0.01
-var contrast: float = 1.01
+var contrast: float = 0.8
 var dithering_strength: float = 0.1
 
 # Shader material

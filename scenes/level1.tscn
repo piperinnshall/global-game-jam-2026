@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ccuujvesgo0lt"]
+[gd_scene load_steps=11 format=3 uid="uid://ccuujvesgo0lt"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_ejswk"]
 [ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="2_bbk5w"]
@@ -9,63 +9,69 @@
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="7_f31uk"]
 [ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="8_conm7"]
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://ojs5t0mnrg78" path="res://scenes/moving.tscn" id="10_d3jkd"]
 
-[node name="level1" type="Node2D" unique_id=542516710]
+[node name="level1" type="Node2D"]
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=387227581]
+[node name="ColorRect2" type="ColorRect" parent="."]
 offset_left = -76.0
 offset_top = -23.0
 offset_right = 1256.0
 offset_bottom = 749.0
 color = Color(0.39308554, 0.39308548, 0.39308557, 1)
 
-[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_ejswk")]
+[node name="platform1" parent="." instance=ExtResource("1_ejswk")]
 position = Vector2(73, 619)
 
-[node name="platform2" parent="." unique_id=930743751 instance=ExtResource("2_bbk5w")]
+[node name="platform2" parent="." instance=ExtResource("2_bbk5w")]
 position = Vector2(307, 619)
 
-[node name="platform5" parent="." unique_id=413233488 instance=ExtResource("2_bbk5w")]
-position = Vector2(136, 480)
+[node name="platform3" parent="." instance=ExtResource("3_conm7")]
+position = Vector2(585, 539)
 
-[node name="platform3" parent="." unique_id=429574875 instance=ExtResource("3_conm7")]
-position = Vector2(519, 538)
-
-[node name="wall1" parent="." unique_id=1534946682 instance=ExtResource("4_d3jkd")]
+[node name="wall1" parent="." instance=ExtResource("4_d3jkd")]
 position = Vector2(717, 573)
 
-[node name="tree" parent="." unique_id=511538616 instance=ExtResource("5_u3awl")]
+[node name="tree" parent="." instance=ExtResource("5_u3awl")]
 position = Vector2(813, 435)
 
-[node name="platform4" parent="." unique_id=446637644 instance=ExtResource("1_ejswk")]
+[node name="platform4" parent="." instance=ExtResource("1_ejswk")]
 position = Vector2(1002, 427)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1150470305]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 721.0
 offset_top = 454.0
 offset_right = 1275.0
 offset_bottom = 757.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="." unique_id=764614066]
-offset_left = 478.0
-offset_top = 559.0
-offset_right = 1032.0
-offset_bottom = 862.0
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 540.0
+offset_top = 558.0
+offset_right = 1094.0
+offset_bottom = 861.0
 color = Color(0, 0, 0, 1)
 
-[node name="MaskPickup" parent="." unique_id=2082499342 instance=ExtResource("6_2ku1j")]
-position = Vector2(180, 392)
+[node name="moving" parent="." instance=ExtResource("10_d3jkd")]
+position = Vector2(350, 475)
+start_position = Vector2(158, 475)
+end_position = Vector2(350, 475)
 
-[node name="Player" parent="." unique_id=291978468 instance=ExtResource("7_f31uk")]
+[node name="MaskPickup" parent="." instance=ExtResource("6_2ku1j")]
+position = Vector2(154, 383)
+
+[node name="Player" parent="." instance=ExtResource("7_f31uk")]
 position = Vector2(79, 573)
 scale = Vector2(0.23999876, 0.23999876)
 
-[node name="wall2" parent="." unique_id=292770186 instance=ExtResource("8_conm7")]
+[node name="wall2" parent="." instance=ExtResource("8_conm7")]
 position = Vector2(-20, 483)
 
-[node name="wall4" parent="." unique_id=1710717850 instance=ExtResource("8_conm7")]
+[node name="wall4" parent="." instance=ExtResource("8_conm7")]
 position = Vector2(-21, 235)
 
-[node name="wall3" parent="." unique_id=1129883832 instance=ExtResource("9_d3jkd")]
-position = Vector2(478, 649)
+[node name="wall3" parent="." instance=ExtResource("9_d3jkd")]
+position = Vector2(540, 643)
+
+[node name="platform5" parent="." instance=ExtResource("1_ejswk")]
+position = Vector2(520, 620)
