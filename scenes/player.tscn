@@ -63,22 +63,79 @@ damping_max = 20.0
 scale_min = 2.0
 scale_max = 5.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1992027063]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_doublejump"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+gravity = Vector3(0, 150, 0)
+damping_min = 30.0
+damping_max = 60.0
+scale_min = 6.0
+scale_max = 14.0
+color = Color(0.4, 0.7, 1, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dash"]
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 20.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+gravity = Vector3(0, 50, 0)
+damping_min = 50.0
+damping_max = 80.0
+scale_min = 4.0
+scale_max = 9.0
+color = Color(1, 0.8, 0.3, 1)
+
+[node name="Player" type="CharacterBody2D" unique_id=291978468]
 script = ExtResource("1_g2els")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1586852942]
+[node name="SpriteContainer" type="Node2D" parent="." unique_id=384434800]
+
+[node name="PlayerSprite" type="Sprite2D" parent="SpriteContainer" unique_id=116431480]
 texture = ExtResource("2_sprite")
 region_enabled = true
 region_rect = Rect2(70, 387, 306, 271)
 
-[node name="MaskSprite" type="Sprite2D" parent="Sprite2D" unique_id=1067686723]
+[node name="Mask1Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=535516311]
 visible = false
+position = Vector2(6, -60)
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(394, 301, 284, 365)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1041341102]
+[node name="Mask2Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1506178439]
+visible = false
+position = Vector2(11, -73)
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(705, 270, 247, 397)
+
+[node name="Mask3Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=2014092039]
+visible = false
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(394, 301, 284, 365)
+
+[node name="Mask4Sprite" type="Sprite2D" parent="SpriteContainer" unique_id=1113622645]
+visible = false
+texture = ExtResource("2_sprite")
+region_enabled = true
+region_rect = Rect2(394, 301, 284, 365)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1836327837]
 position = Vector2(3, -12)
 shape = SubResource("RectangleShape2D_1")
 
-[node name="JumpParticles" type="GPUParticles2D" parent="." unique_id=263276945]
+[node name="JumpParticles" type="GPUParticles2D" parent="." unique_id=1022448910]
 modulate = Color(1, 1, 1, 0.42745098)
 position = Vector2(0, 130)
 emitting = false
@@ -87,10 +144,9 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_jump")
 
-[node name="LandParticles" type="GPUParticles2D" parent="." unique_id=1331328646]
+[node name="LandParticles" type="GPUParticles2D" parent="." unique_id=1897817351]
 modulate = Color(1, 1, 1, 0.45882353)
-position = Vector2(-3.0000005, 92.999985)
-rotation = -0.008160591
+position = Vector2(0, 93)
 emitting = false
 amount = 12
 lifetime = 0.51
@@ -98,24 +154,42 @@ one_shot = true
 explosiveness = 0.8
 process_material = SubResource("ParticleProcessMaterial_land")
 
-[node name="WalkParticles" type="GPUParticles2D" parent="." unique_id=459175697]
+[node name="WalkParticles" type="GPUParticles2D" parent="." unique_id=1423829612]
 modulate = Color(1, 1, 1, 0.37254903)
 position = Vector2(0, 120)
 emitting = false
 amount = 5
-lifetime = 1.8499999999999999
+lifetime = 1.85
 one_shot = true
 explosiveness = 0.7
 randomness = 0.08
 process_material = SubResource("ParticleProcessMaterial_walk")
 
-[node name="JumpTrail" type="GPUParticles2D" parent="." unique_id=1808285626]
-visible = false
-modulate = Color(0.0035191667, 0.0035191681, 0.0035191672, 0.20392157)
+[node name="JumpTrail" type="GPUParticles2D" parent="." unique_id=2120823938]
+modulate = Color(0.003519, 0.003519, 0.003519, 0.203922)
 z_index = -1
+scale = Vector2(1.1842797, 1.182437)
 emitting = false
 amount = 12
 lifetime = 0.3
 preprocess = 0.05
-collision_base_size = 7.34
 process_material = SubResource("ParticleProcessMaterial_trail")
+
+[node name="DoubleJumpEffect" type="GPUParticles2D" parent="." unique_id=398839560]
+modulate = Color(0, 0, 0, 0.6)
+z_index = -1
+emitting = false
+amount = 20
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_doublejump")
+
+[node name="DashParticles" type="GPUParticles2D" parent="." unique_id=291999609]
+modulate = Color(0, 0, 0, 0.5019608)
+z_index = -1
+emitting = false
+amount = 15
+lifetime = 0.4
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_dash")
