@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cloppkq726ur4" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://daayyvoeq7x1u" path="res://player_spritesheet.png" id="2_sprite"]
+[ext_resource type="AudioStream" uid="uid://dj074262uwmxe" path="res://sounds/jumpsound.mp3" id="3_dqkch"]
+[ext_resource type="AudioStream" uid="uid://cls8m0ae5mljn" path="res://sounds/dashsound.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://hnyihlv3x4wr" path="res://sounds/landsound.mp3" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://cmnyulirgsmyk" path="res://sounds/shockwavesound.mp3" id="5_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(193, 191)
@@ -214,3 +218,22 @@ process_material = SubResource("ParticleProcessMaterial_dash")
 energy = 8.47
 texture = SubResource("GradientTexture2D_g2els")
 texture_scale = 25.29
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1114684902]
+stream = ExtResource("3_dqkch")
+volume_db = -11.86
+pitch_scale = 1.95
+
+[node name="LandSound" type="AudioStreamPlayer" parent="." unique_id=1474853314]
+stream = ExtResource("4_tuyoq")
+volume_db = -9.123
+pitch_scale = 0.9
+
+[node name="Dashsound" type="AudioStreamPlayer" parent="." unique_id=1878845496]
+stream = ExtResource("3_qhqgy")
+volume_db = 0.125
+pitch_scale = 0.52
+
+[node name="ShockwaveSound" type="AudioStreamPlayer" parent="." unique_id=1636623931]
+stream = ExtResource("5_qlg0r")
+volume_db = -10.947

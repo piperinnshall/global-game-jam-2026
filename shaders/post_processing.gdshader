@@ -14,6 +14,7 @@ uniform float scanline_intensity : hint_range(0.0, 1.0) = 0.15;
 uniform float noise_intensity : hint_range(0.0, 1.0) = 0.08;
 uniform float contrast : hint_range(0.5, 2.0) = 1.3;
 uniform float dithering_strength : hint_range(0.0, 1.0) = 0.4;
+uniform int color_depth : hint_range(2, 256) = 8; // Number of color levels per channel
 uniform vec2 screen_size = vec2(1920.0, 1080.0);
 
 // Random function for noise
@@ -39,6 +40,28 @@ float bayer4x4(vec2 position) {
     );
     
     return bayer[y * 4 + x];
+}
+
+// Apply dithering with color quantization
+vec3 apply_dithering(vec3 color, vec2 position, float strength, int levels) {
+    if(strength < 0.01) {
+        return color;
+    }
+    
+    // Get dither value
+    float dither = bayer4x4(position);
+    
+    // Apply dithering to each channel
+    vec3 dithered = color;
+    float level_count = float(levels);
+    
+    // Quantize each channel with dithering
+    dithered.r = floor(color.r * level_count + dither * strength) / level_count;
+    dithered.g = floor(color.g * level_count + dither * strength) / level_count;
+    dithered.b = floor(color.b * level_count + dither * strength) / level_count;
+    
+    // Blend between original and dithered based on strength
+    return mix(color, dithered, strength);
 }
 
 // Simple bloom approximation
@@ -86,20 +109,13 @@ void fragment() {
     
     vec3 color = vec3(r, g, b);
     
-    // 3. CONVERT TO BLACK AND WHITE (with contrast)
-    float gray = dot(color, vec3(0.299, 0.587, 0.114));
-    gray = pow(gray, 1.0 / contrast);
-    
-    // 4. DITHERING (for sketchy look)
-    float dither = bayer4x4(pixel_pos) - 0.5;
-    gray += dither * dithering_strength * 0.1;
-    
-    // Threshold to pure black and white with some midtones
-    if(dithering_strength > 0.01) {
-        gray = gray > (dither * dithering_strength + 0.5) ? 1.0 : 0.0;
+    // 3. CONTRAST ADJUSTMENT (applied to each channel to preserve color)
+    if(contrast != 1.0) {
+        color = pow(color, vec3(1.0 / contrast));
     }
     
-    color = vec3(gray);
+    // 4. DITHERING (with color quantization)
+    color = apply_dithering(color, pixel_pos, dithering_strength, color_depth);
     
     // 5. BLOOM
     if(bloom_intensity > 0.0) {

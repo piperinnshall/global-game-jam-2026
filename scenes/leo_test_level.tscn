@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://djrdrhloejxal"]
 
+[ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_0nef8"]
 [ext_resource type="Texture2D" uid="uid://buspm1155yp47" path="res://icon.svg" id="1_a8p6y"]
+[ext_resource type="PackedScene" uid="uid://dashwall001" path="res://scenes/dashwall.tscn" id="2_6ltgx"]
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="2_b17tg"]
 [ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="3_ugxxg"]
 
@@ -8,6 +10,14 @@
 size = Vector2(527, 45)
 
 [node name="LeoTestLevel" type="Node2D" unique_id=2089806708]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=462059140]
+position = Vector2(477, 309)
+scale = Vector2(1.3442382, 1.3442383)
+texture = ExtResource("1_0nef8")
+
+[node name="DashThroughWall" parent="." unique_id=1876965036 instance=ExtResource("2_6ltgx")]
+position = Vector2(358, 464)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1074074447]
 position = Vector2(445, 544)
@@ -26,11 +36,11 @@ scale = Vector2(0.235, 0.235)
 
 [node name="MaskPickup" parent="." unique_id=2082499342 instance=ExtResource("3_ugxxg")]
 position = Vector2(625, 445)
+mask_type = 1
 
 [node name="MaskPickup2" parent="." unique_id=1653430876 instance=ExtResource("3_ugxxg")]
 position = Vector2(189, 457)
-mask_type = 3
 
 [node name="MaskPickup3" parent="." unique_id=1468473425 instance=ExtResource("3_ugxxg")]
-position = Vector2(559, 329)
+position = Vector2(503, 330)
 mask_type = 1
