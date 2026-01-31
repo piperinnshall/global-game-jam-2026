@@ -53,16 +53,36 @@ offset_bottom = 861.0
 color = Color(0, 0, 0, 1)
 
 [node name="moving" parent="." instance=ExtResource("10_d3jkd")]
-position = Vector2(350, 475)
-start_position = Vector2(158, 475)
-end_position = Vector2(350, 475)
+position = Vector2(174, 475)
+start_position = Vector2(174, 475)
+end_position = Vector2(375, 475)
 
 [node name="MaskPickup" parent="." instance=ExtResource("6_2ku1j")]
 position = Vector2(154, 383)
 
 [node name="Player" parent="." instance=ExtResource("7_f31uk")]
-position = Vector2(79, 573)
+position = Vector2(137, 574)
 scale = Vector2(0.23999876, 0.23999876)
+move_speed = 200.0
+jump_velocity = -400.0
+acceleration = 800.0
+friction = 1000.0
+air_acceleration = 500.0
+walk_bob_speed = 18.0
+walk_bob_amount = 0.15
+walk_rotation_amount = 10.0
+flip_duration = 0.15
+flip_scale_amount = 0.3
+jump_squash = Vector2(1.15, 0.75)
+jump_stretch = Vector2(0.75, 1.15)
+land_squash = Vector2(1.7, 0.3)
+bounce_back_speed = 10.0
+walk_particle_interval = 0.15
+shockwave_damage = 50.0
+shockwave_range = 150.0
+shockwave_speed = 400.0
+shockwave_cooldown_time = 1.0
+shockwave_knockback = 300.0
 
 [node name="wall2" parent="." instance=ExtResource("8_conm7")]
 position = Vector2(-20, 483)
