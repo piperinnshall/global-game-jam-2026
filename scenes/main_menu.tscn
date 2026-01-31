@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://tk8t8y5sfpp3"]
+
+[ext_resource type="Script" uid="uid://cj8ku1kxit8rw" path="res://scripts/main_menu.gd" id="1_x5m3r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+
+[node name="MainMenu" type="Control" unique_id=1217161454]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x5m3r")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1743660777]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VignetteTop" type="ColorRect" parent="." unique_id=287169707]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 150.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.3)
+
+[node name="VignetteBottom" type="ColorRect" parent="." unique_id=731457351]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.3)
+
+[node name="Title" type="Label" parent="." unique_id=865217511]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 150.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 72
+text = "False Visage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="." unique_id=1493812630]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -50.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayButton" type="Button" parent="MenuContainer" unique_id=1381757996]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "PLAY"
+flat = true
+
+[node name="QuitButton" type="Button" parent="MenuContainer" unique_id=499956911]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_1")
+text = "QUIT"
+flat = true
+
+[node name="Decorations" type="Node2D" parent="." unique_id=1012619568]
+
+[node name="GroundLine" type="Line2D" parent="Decorations" unique_id=690776406]
+points = PackedVector2Array(0, 500, 1152, 500)
+width = 3.0
+
+[node name="Grass1" type="Line2D" parent="Decorations" unique_id=2040053452]
+points = PackedVector2Array(80, 500, 85, 465, 90, 500)
+width = 3.0
+
+[node name="Grass2" type="Line2D" parent="Decorations" unique_id=1945066287]
+points = PackedVector2Array(150, 500, 154, 470, 158, 500)
+width = 3.0
+
+[node name="Grass3" type="Line2D" parent="Decorations" unique_id=113402631]
+points = PackedVector2Array(220, 500, 226, 460, 232, 500)
+width = 3.0
+
+[node name="Grass4" type="Line2D" parent="Decorations" unique_id=1984938549]
+points = PackedVector2Array(310, 500, 314, 468, 318, 500)
+width = 3.0
+
+[node name="Grass5" type="Line2D" parent="Decorations" unique_id=244998498]
+points = PackedVector2Array(380, 500, 385, 463, 390, 500)
+width = 3.0
+
+[node name="Grass6" type="Line2D" parent="Decorations" unique_id=1487581170]
+points = PackedVector2Array(460, 500, 465, 472, 470, 500)
+width = 3.0
+
+[node name="Grass7" type="Line2D" parent="Decorations" unique_id=1032262072]
+points = PackedVector2Array(540, 500, 544, 467, 548, 500)
+width = 3.0
+
+[node name="Grass8" type="Line2D" parent="Decorations" unique_id=1100294424]
+points = PackedVector2Array(605, 500, 610, 465, 615, 500)
+width = 3.0
+
+[node name="Grass9" type="Line2D" parent="Decorations" unique_id=8226192]
+points = PackedVector2Array(685, 500, 690, 470, 695, 500)
+width = 3.0
+
+[node name="Grass10" type="Line2D" parent="Decorations" unique_id=550997999]
+points = PackedVector2Array(760, 500, 765, 464, 770, 500)
+width = 3.0
+
+[node name="Grass11" type="Line2D" parent="Decorations" unique_id=75783129]
+points = PackedVector2Array(840, 500, 845, 469, 850, 500)
+width = 3.0
+
+[node name="Grass12" type="Line2D" parent="Decorations" unique_id=1261456583]
+points = PackedVector2Array(920, 500, 924, 466, 928, 500)
+width = 3.0
+
+[node name="Grass13" type="Line2D" parent="Decorations" unique_id=628697881]
+points = PackedVector2Array(990, 500, 995, 471, 1000, 500)
+width = 3.0
+
+[node name="Grass14" type="Line2D" parent="Decorations" unique_id=511637092]
+points = PackedVector2Array(1060, 500, 1064, 468, 1068, 500)
+width = 3.0
+
+[node name="Grass15" type="Line2D" parent="Decorations" unique_id=734290128]
+points = PackedVector2Array(120, 500, 123, 475, 126, 500)
+width = 3.0
+
+[node name="Grass16" type="Line2D" parent="Decorations" unique_id=1590429836]
+points = PackedVector2Array(270, 500, 274, 462, 278, 500)
+width = 3.0
+
+[node name="Grass17" type="Line2D" parent="Decorations" unique_id=797775821]
+points = PackedVector2Array(420, 500, 424, 473, 428, 500)
+width = 3.0
+
+[node name="Grass18" type="Line2D" parent="Decorations" unique_id=1861894771]
+points = PackedVector2Array(630, 500, 634, 466, 638, 500)
+width = 3.0
+
+[node name="Grass19" type="Line2D" parent="Decorations" unique_id=415268279]
+points = PackedVector2Array(800, 500, 804, 471, 808, 500)
+width = 3.0
+
+[node name="Grass20" type="Line2D" parent="Decorations" unique_id=1404819424]
+points = PackedVector2Array(950, 500, 954, 469, 958, 500)
+width = 3.0
+
+[connection signal="mouse_entered" from="MenuContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_exited" from="MenuContainer/PlayButton" to="." method="_on_play_button_mouse_exited"]
+[connection signal="pressed" from="MenuContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="MenuContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="mouse_exited" from="MenuContainer/QuitButton" to="." method="_on_quit_button_mouse_exited"]
+[connection signal="pressed" from="MenuContainer/QuitButton" to="." method="_on_quit_button_pressed"]
