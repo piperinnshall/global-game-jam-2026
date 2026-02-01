@@ -1,17 +1,35 @@
 extends AnimatableBody2D
 
-@export var start_position: Vector2
-@export var end_position: Vector2
+enum MoveDirection {
+	HORIZONTAL,
+	VERTICAL
+}
+
+@export var direction: MoveDirection = MoveDirection.HORIZONTAL
+@export var start_offset: float = 0.0  # Distance from starting position
+@export var end_offset: float = 200.0  # Distance to travel
 @export var speed: float = 100.0  # Units per second
 @export var wait_time: float = 0.5
 
+var _start_position: Vector2
+var _end_position: Vector2
 var _target: Vector2
 var _waiting := false
 var _progress := 0.0  # Tracks lerp progress from 0 to 1
 
 func _ready():
-	global_position = start_position
-	_target = end_position
+	# Calculate start and end positions based on direction
+	_start_position = global_position
+	
+	if direction == MoveDirection.HORIZONTAL:
+		_start_position.x += start_offset
+		_end_position = _start_position + Vector2(end_offset, 0)
+	else:  # VERTICAL
+		_start_position.y += start_offset
+		_end_position = _start_position + Vector2(0, end_offset)
+	
+	global_position = _start_position
+	_target = _end_position
 	_progress = 0.0
 	
 	# AnimatableBody2D automatically handles platform movement
@@ -21,7 +39,7 @@ func _process(delta):
 	if _waiting:
 		return
 	
-	var start_pos = start_position if _target == end_position else end_position
+	var start_pos = _start_position if _target == _end_position else _end_position
 	var distance = start_pos.distance_to(_target)
 	
 	if distance == 0:
@@ -49,7 +67,7 @@ func _process(delta):
 func _wait_and_switch():
 	_waiting = true
 	await get_tree().create_timer(wait_time).timeout
-	_target = start_position if _target == end_position else end_position
+	_target = _start_position if _target == _end_position else _end_position
 	_waiting = false
 
 # Simple ease-in-out function using sine

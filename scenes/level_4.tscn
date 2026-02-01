@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://cfpk44a6th13w"]
+
+[ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_7ewpb"]
+[ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_rbbjd"]
+[ext_resource type="PackedScene" uid="uid://bgo2efk6ygmhu" path="res://scenes/wall_1.tscn" id="2_wom6i"]
+[ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="3_ycko3"]
+[ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="4_x7blo"]
+[ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="5_ycko3"]
+[ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="6_x7blo"]
+[ext_resource type="PackedScene" uid="uid://dwb07vpevsnoc" path="res://scenes/destrucableblock.tscn" id="7_qsmat"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="8_yk4f3"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="10_py6g0"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="11_g31h8"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="12_hy5x3"]
+[ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="13_py6g0"]
+
+[node name="level4" type="Node2D" unique_id=807512350]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1571503786]
+position = Vector2(196.00012, 72.00003)
+scale = Vector2(1.3295897, 1.1948242)
+texture = ExtResource("1_7ewpb")
+
+[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_rbbjd")]
+position = Vector2(75, 381)
+
+[node name="wall1" parent="." unique_id=1534946682 instance=ExtResource("2_wom6i")]
+position = Vector2(224, 502)
+
+[node name="platform2" parent="." unique_id=930743751 instance=ExtResource("3_ycko3")]
+position = Vector2(445, 380)
+
+[node name="platform3" parent="." unique_id=429574875 instance=ExtResource("4_x7blo")]
+position = Vector2(647, 379)
+
+[node name="wall2" parent="." unique_id=292770186 instance=ExtResource("5_ycko3")]
+position = Vector2(402, 510)
+
+[node name="wall3" parent="." unique_id=1129883832 instance=ExtResource("6_x7blo")]
+position = Vector2(791, 507)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1297239547]
+offset_left = 404.0
+offset_top = 394.0
+offset_right = 793.0
+offset_bottom = 670.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1324652884]
+offset_left = -156.0
+offset_top = 392.0
+offset_right = 233.0
+offset_bottom = 668.0
+color = Color(0, 0, 0, 1)
+
+[node name="platform4" parent="." unique_id=2028524624 instance=ExtResource("1_rbbjd")]
+position = Vector2(685, 235)
+rotation = 3.1415927
+scale = Vector2(1.695, 1.25)
+
+[node name="wall4" parent="." unique_id=221463097 instance=ExtResource("2_wom6i")]
+position = Vector2(403, 67)
+
+[node name="wall5" parent="." unique_id=16992984 instance=ExtResource("5_ycko3")]
+position = Vector2(788, 102)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1994618261]
+offset_left = 400.0
+offset_top = -55.0
+offset_right = 789.0
+offset_bottom = 221.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect3" unique_id=17469671]
+layout_mode = 0
+offset_left = -453.0
+offset_top = -98.0
+offset_right = 40.0
+offset_bottom = 178.0
+color = Color(0, 0, 0, 1)
+
+[node name="DestructibleBlock" parent="." unique_id=1264603799 instance=ExtResource("7_qsmat")]
+position = Vector2(551, 355)
+
+[node name="DestructibleBlock" parent="DestructibleBlock" unique_id=1352511808 instance=ExtResource("7_qsmat")]
+position = Vector2(0, -35)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock" unique_id=746776184 instance=ExtResource("7_qsmat")]
+position = Vector2(0, -37)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock/DestructibleBlock" unique_id=1398501471 instance=ExtResource("7_qsmat")]
+position = Vector2(36, 72)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock" unique_id=1485762473 instance=ExtResource("7_qsmat")]
+position = Vector2(-1, -38)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock" unique_id=205221003 instance=ExtResource("7_qsmat")]
+position = Vector2(36, 38)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock" unique_id=12603147 instance=ExtResource("7_qsmat")]
+position = Vector2(-108, 2)
+
+[node name="DestructibleBlock" parent="DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock/DestructibleBlock" unique_id=266747735 instance=ExtResource("7_qsmat")]
+position = Vector2(0, -36)
+
+[node name="MaskPickup" parent="." unique_id=285981210 instance=ExtResource("8_yk4f3")]
+position = Vector2(443, 322)
+mask_type = 3
+
+[node name="wall6" parent="." unique_id=657751002 instance=ExtResource("5_ycko3")]
+position = Vector2(-6, 238)
+
+[node name="platform5" parent="." unique_id=1928182507 instance=ExtResource("3_ycko3")]
+position = Vector2(50, 113)
+
+[node name="platform6" parent="." unique_id=980561194 instance=ExtResource("1_rbbjd")]
+position = Vector2(261, 117)
+
+[node name="platform7" parent="." unique_id=2046735226 instance=ExtResource("4_x7blo")]
+position = Vector2(954, 459)
+
+[node name="Door" parent="." unique_id=501915732 instance=ExtResource("10_py6g0")]
+position = Vector2(1041, 361)
+key = NodePath("../KeyPickup")
+next_scene = "res://scenes/level_5.tscn"
+
+[node name="KeyPickup" parent="." unique_id=1502742629 instance=ExtResource("11_g31h8")]
+position = Vector2(732, 332)
+
+[node name="Player" parent="." unique_id=291978468 instance=ExtResource("12_hy5x3")]
+position = Vector2(95, 318)
+scale = Vector2(0.235, 0.235)
+
+[node name="killzone" parent="." unique_id=800593481 instance=ExtResource("13_py6g0")]
+position = Vector2(1004, 744.00006)
+scale = Vector2(1.805, 1.805)
