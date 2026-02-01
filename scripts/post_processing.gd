@@ -7,17 +7,17 @@ var color_rect: ColorRect
 var viewport: Viewport
 
 # Effect parameters
-var bloom_intensity: float = 0.1
-var bloom_threshold: float = 0.1
+var bloom_intensity: float = 0.3
+var bloom_threshold: float = 0.2
 var chrom_aberration_strength: float = 1.0
 var vignette_intensity: float = 0.4
 var vignette_smoothness: float = 0.5
 var pixelation_amount: int = 2
-var scanline_intensity: float = 0.3
-var noise_intensity: float = 0.01
-var contrast: float = 0.8
-var dithering_strength: float = 0.4
-var color_depth: int = 8  # Number of color levels per channel (lower = more visible dithering)
+var scanline_intensity: float = 0.6
+var noise_intensity: float = 0.04
+var contrast: float = 1.2
+var dithering_strength: float = 1.2
+var color_depth: int = 5  # Number of color levels per channel (lower = more visible dithering)
 
 # Shader material
 var shader_material: ShaderMaterial

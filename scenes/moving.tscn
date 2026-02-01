@@ -9,8 +9,15 @@ size = Vector2(232, 21.5)
 [node name="moving" type="AnimatableBody2D" unique_id=1428898490]
 script = ExtResource("1_du00b")
 
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=253260221]
+position = Vector2(-4, 3)
+scale = Vector2(1.4713374, 1.0121951)
+texture = ExtResource("1_eupwt")
+region_enabled = true
+region_rect = Rect2(6, 491, 157, 41)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1872257149]
-position = Vector2(25, -143)
+position = Vector2(28, -145)
 scale = Vector2(1.565, 1.565)
 texture = ExtResource("1_eupwt")
 region_enabled = true

@@ -2,18 +2,24 @@
 
 [ext_resource type="Script" uid="uid://ecm04jufynxv" path="res://scripts/key_pickup.gd" id="1_qt5rs"]
 [ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_unm83"]
+[ext_resource type="AudioStream" uid="uid://dighnrwsv3vsm" path="res://sounds/maskputonsound.mp3" id="3_xhu78"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_unm83"]
 radius = 25.079872
 
-[node name="KeyPickup" type="Area2D"]
+[node name="KeyPickup" type="Area2D" unique_id=890947704]
 script = ExtResource("1_qt5rs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1272677125]
 shape = SubResource("CircleShape2D_unm83")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=315712628]
 position = Vector2(2, -4)
 texture = ExtResource("1_unm83")
 region_enabled = true
 region_rect = Rect2(290.12146, 275.1319, 80.48523, 78.473145)
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=687256762]
+stream = ExtResource("3_xhu78")
+volume_db = -11.859
+pitch_scale = 2.4

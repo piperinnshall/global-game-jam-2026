@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://dpjp0m0b1sjxv"]
+
+[ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_fl27d"]
+[ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_hclxg"]
+[ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="1_uk14l"]
+[ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="2_ofuys"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="3_21d8y"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="4_e6rfr"]
+[ext_resource type="PackedScene" uid="uid://dwb07vpevsnoc" path="res://scenes/destrucableblock.tscn" id="6_ng28g"]
+[ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="7_yxmu7"]
+[ext_resource type="PackedScene" uid="uid://dashwall001" path="res://scenes/dashwall.tscn" id="8_68dkj"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="9_bg236"]
+[ext_resource type="PackedScene" uid="uid://bgo2efk6ygmhu" path="res://scenes/wall_1.tscn" id="10_upujw"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="11_aa4c8"]
+[ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="12_bg236"]
+[ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="13_upujw"]
+[ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="14_aa4c8"]
+
+[node name="level10" type="Node2D" unique_id=1172765326]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=998277922]
+position = Vector2(976, 60.000004)
+scale = Vector2(1.3295897, 1.1948242)
+texture = ExtResource("1_hclxg")
+
+[node name="DestructibleBlock10" parent="." unique_id=324304454 instance=ExtResource("6_ng28g")]
+position = Vector2(609, 491)
+
+[node name="platform6" parent="." unique_id=429574875 instance=ExtResource("1_uk14l")]
+position = Vector2(-42, 328)
+
+[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_fl27d")]
+position = Vector2(994, 385)
+
+[node name="moving" parent="." unique_id=1428898490 instance=ExtResource("2_ofuys")]
+position = Vector2(778, 240)
+direction = 1
+end_offset = 400.0
+
+[node name="Sprite2D" parent="moving" index="1" unique_id=1872257149]
+visible = false
+
+[node name="CollisionShape2D" parent="moving" index="2" unique_id=624919414]
+position = Vector2(-6, -5)
+
+[node name="MaskPickup" parent="." unique_id=1747842491 instance=ExtResource("3_21d8y")]
+position = Vector2(978, 325)
+mask_type = 3
+
+[node name="Player" parent="." unique_id=291978468 instance=ExtResource("4_e6rfr")]
+position = Vector2(1081, 340)
+scale = Vector2(0.225, 0.225)
+
+[node name="platform2" parent="." unique_id=302059877 instance=ExtResource("1_fl27d")]
+position = Vector2(725, 111)
+scale = Vector2(0.81, 0.64)
+
+[node name="DestructibleBlock" parent="." unique_id=1264603799 instance=ExtResource("6_ng28g")]
+position = Vector2(523, 179)
+
+[node name="DestructibleBlock2" parent="." unique_id=1713147714 instance=ExtResource("6_ng28g")]
+position = Vector2(545, 321)
+
+[node name="platform3" parent="." unique_id=30583563 instance=ExtResource("1_fl27d")]
+position = Vector2(278, 504)
+
+[node name="platform4" parent="." unique_id=930743751 instance=ExtResource("7_yxmu7")]
+position = Vector2(326, 318)
+scale = Vector2(0.775, 0.7)
+
+[node name="platform5" parent="." unique_id=226031813 instance=ExtResource("1_fl27d")]
+position = Vector2(-36, 480)
+
+[node name="MaskPickup2" parent="." unique_id=624964147 instance=ExtResource("3_21d8y")]
+position = Vector2(504, 426)
+
+[node name="MaskPickup3" parent="." unique_id=1634359512 instance=ExtResource("3_21d8y")]
+position = Vector2(510, 248)
+mask_type = 1
+
+[node name="DashThroughWall" parent="." unique_id=1876965036 instance=ExtResource("8_68dkj")]
+position = Vector2(117, 420)
+
+[node name="KeyPickup" parent="." unique_id=890947704 instance=ExtResource("9_bg236")]
+position = Vector2(56, 427)
+
+[node name="DestructibleBlock3" parent="." unique_id=850914751 instance=ExtResource("6_ng28g")]
+position = Vector2(606, 189)
+
+[node name="DestructibleBlock4" parent="." unique_id=940602379 instance=ExtResource("6_ng28g")]
+position = Vector2(605, 403)
+
+[node name="wall1" parent="." unique_id=1534946682 instance=ExtResource("10_upujw")]
+position = Vector2(1159, 246)
+
+[node name="platform7" parent="." unique_id=253319051 instance=ExtResource("1_fl27d")]
+position = Vector2(200, 180)
+
+[node name="Door" parent="." unique_id=1944736732 instance=ExtResource("11_aa4c8")]
+position = Vector2(235, 78)
+key = NodePath("../KeyPickup")
+
+[node name="DestructibleBlock5" parent="." unique_id=2092007115 instance=ExtResource("6_ng28g")]
+position = Vector2(606, 232)
+
+[node name="DestructibleBlock6" parent="." unique_id=315109455 instance=ExtResource("6_ng28g")]
+position = Vector2(605, 275)
+
+[node name="DestructibleBlock7" parent="." unique_id=656062067 instance=ExtResource("6_ng28g")]
+position = Vector2(605, 319)
+
+[node name="DestructibleBlock8" parent="." unique_id=1166014479 instance=ExtResource("6_ng28g")]
+position = Vector2(604, 361)
+
+[node name="DestructibleBlock9" parent="." unique_id=30074413 instance=ExtResource("6_ng28g")]
+position = Vector2(608, 447)
+
+[node name="DestructibleBlock11" parent="." unique_id=1323258737 instance=ExtResource("6_ng28g")]
+position = Vector2(608, 532)
+
+[node name="DestructibleBlock12" parent="." unique_id=663197334 instance=ExtResource("6_ng28g")]
+position = Vector2(607, 575)
+
+[node name="DestructibleBlock13" parent="." unique_id=820859503 instance=ExtResource("6_ng28g")]
+position = Vector2(608, 618)
+
+[node name="DestructibleBlock14" parent="." unique_id=580865184 instance=ExtResource("6_ng28g")]
+position = Vector2(498, 324)
+
+[node name="DestructibleBlock15" parent="." unique_id=613715509 instance=ExtResource("6_ng28g")]
+position = Vector2(547, 502)
+
+[node name="DestructibleBlock16" parent="." unique_id=998715380 instance=ExtResource("6_ng28g")]
+position = Vector2(504, 500)
+
+[node name="wall2" parent="." unique_id=121769900 instance=ExtResource("10_upujw")]
+position = Vector2(122, 202)
+
+[node name="wall3" parent="." unique_id=292770186 instance=ExtResource("12_bg236")]
+position = Vector2(126, 56)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1514970768]
+offset_left = -44.0
+offset_top = -21.0
+offset_right = 129.0
+offset_bottom = 345.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=204289319]
+layout_mode = 0
+offset_left = 979.0
+offset_top = 422.0
+offset_right = 1226.0
+offset_bottom = 788.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/ColorRect" unique_id=339771555]
+layout_mode = 0
+offset_left = -1056.0
+offset_top = 99.0
+offset_right = -809.0
+offset_bottom = 465.0
+color = Color(0, 0, 0, 1)
+
+[node name="wall4" parent="." unique_id=1118618755 instance=ExtResource("10_upujw")]
+position = Vector2(947, 517)
+
+[node name="wall5" parent="." unique_id=1381633553 instance=ExtResource("12_bg236")]
+position = Vector2(112, 603)
+
+[node name="wall6" parent="." unique_id=1129883832 instance=ExtResource("13_upujw")]
+position = Vector2(-25, 439)
+
+[node name="killzone" parent="." unique_id=800593481 instance=ExtResource("14_aa4c8")]
+position = Vector2(547, 693)
+
+[editable path="moving"]
