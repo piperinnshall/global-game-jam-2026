@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjvg55hsq6kr2"]
+
+[ext_resource type="Texture2D" uid="uid://c24lmt83t5p6q" path="res://comic/comic.png" id="1_byyj4"]
+[ext_resource type="Script" uid="uid://dg4dgp6hfugcx" path="res://scripts/comic_viewer.gd" id="1_od3x5"]
+[ext_resource type="Texture2D" uid="uid://ds2ygpucld6tg" path="res://comic/cover1.png" id="3_f63df"]
+[ext_resource type="Texture2D" uid="uid://dxkmgnc1wpnbf" path="res://comic/cover2.png" id="4_po4tv"]
+[ext_resource type="Texture2D" uid="uid://ch6qf4ij1bpkv" path="res://comic/cover3.png" id="5_k5v57"]
+[ext_resource type="Texture2D" uid="uid://db77g0bppfmhp" path="res://comic/cover4.png" id="6_ggp00"]
+[ext_resource type="Texture2D" uid="uid://x0556djlwdih" path="res://comic/cover5.png" id="7_gpsvq"]
+[ext_resource type="Texture2D" uid="uid://7p6cwmxbttgn" path="res://comic/cover6.png" id="8_2wfkf"]
+[ext_resource type="Texture2D" uid="uid://dapoxw3yycxtx" path="res://comic/cover7.png" id="9_basam"]
+
+[node name="ComicViewer" type="Node2D"]
+script = ExtResource("1_od3x5")
+
+[node name="Comic" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("1_byyj4")
+
+[node name="Cover0" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+rotation = 3.1415927
+texture = ExtResource("3_f63df")
+
+[node name="Cover1" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("3_f63df")
+
+[node name="Cover2" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("4_po4tv")
+
+[node name="Cover3" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("5_k5v57")
+
+[node name="Cover4" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("6_ggp00")
+
+[node name="Cover5" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("7_gpsvq")
+
+[node name="Cover6" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("8_2wfkf")
+
+[node name="Cover7" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("9_basam")
