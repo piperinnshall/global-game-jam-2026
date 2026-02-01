@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_y3yn5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r07xg"]
-size = Vector2(259, 61)
+size = Vector2(259, 32.5)
 
 [node name="platform1" type="Node2D" unique_id=1329440570]
 
@@ -17,5 +17,5 @@ region_rect = Rect2(6, 491, 157, 41)
 [node name="RigidBody2D" type="StaticBody2D" parent="." unique_id=1953209809]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D" unique_id=1499585925]
-position = Vector2(51, 24)
+position = Vector2(51, 9.75)
 shape = SubResource("RectangleShape2D_r07xg")

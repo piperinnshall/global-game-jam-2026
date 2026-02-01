@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://dvkof3cjn3c8"]
+
+[ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_7itlh"]
+[ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="2_l1kof"]
+[ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="3_v7yg4"]
+[ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="4_ci1vt"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="5_ci1vt"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="6_ophlp"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="7_wu5f3"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="8_ophlp"]
+[ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="9_wu5f3"]
+
+[node name="level7" type="Node2D" unique_id=612302491]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1931586779]
+offset_left = -259.0
+offset_top = -262.0
+offset_right = 1596.0
+offset_bottom = 875.0
+color = Color(0.038397167, 0.038397167, 0.03839716, 1)
+
+[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_7itlh")]
+position = Vector2(74, 128)
+
+[node name="moving" parent="." unique_id=1428898490 instance=ExtResource("2_l1kof")]
+position = Vector2(426, 135)
+direction = 1
+
+[node name="platform2" parent="." unique_id=930743751 instance=ExtResource("3_v7yg4")]
+position = Vector2(85, 381)
+
+[node name="platform3" parent="." unique_id=429574875 instance=ExtResource("4_ci1vt")]
+position = Vector2(347, 561)
+
+[node name="platform4" parent="." unique_id=310209791 instance=ExtResource("3_v7yg4")]
+position = Vector2(725, 554)
+
+[node name="MaskPickup" parent="." unique_id=1422340978 instance=ExtResource("5_ci1vt")]
+position = Vector2(769, 491)
+
+[node name="platform5" parent="." unique_id=298786408 instance=ExtResource("1_7itlh")]
+position = Vector2(1010, 434)
+
+[node name="moving2" parent="." unique_id=1719540635 instance=ExtResource("2_l1kof")]
+position = Vector2(759, 154)
+direction = 1
+wait_time = 3.0
+
+[node name="KeyPickup" parent="." unique_id=397104971 instance=ExtResource("6_ophlp")]
+position = Vector2(415, 501)
+
+[node name="platform6" parent="." unique_id=1783646578 instance=ExtResource("4_ci1vt")]
+position = Vector2(1003, 225)
+
+[node name="Door" parent="." unique_id=1739557155 instance=ExtResource("7_wu5f3")]
+position = Vector2(1058, 128)
+key = NodePath("../KeyPickup")
+
+[node name="MaskPickup2" parent="." unique_id=1735883983 instance=ExtResource("5_ci1vt")]
+position = Vector2(197, 62)
+mask_type = 2
+
+[node name="Player" parent="." unique_id=291978468 instance=ExtResource("8_ophlp")]
+position = Vector2(72.99999, 68.99999)
+scale = Vector2(0.24, 0.24)
+
+[node name="killzone" parent="." unique_id=800593481 instance=ExtResource("9_wu5f3")]
+position = Vector2(673, 784)
+scale = Vector2(2.2, 2.2)

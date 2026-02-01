@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccuujvesgo0lt"]
+[gd_scene format=3 uid="uid://ccuujvesgo0lt"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_ejswk"]
 [ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_u3awl"]
@@ -9,104 +9,105 @@
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="7_f31uk"]
 [ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="8_conm7"]
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_d3jkd"]
-[ext_resource type="PackedScene" uid="uid://ojs5t0mnrg78" path="res://scenes/moving.tscn" id="10_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="10_d3jkd"]
 [ext_resource type="PackedScene" uid="uid://cs663kevf65pj" path="res://scenes/text_spawner.tscn" id="11_u3awl"]
 [ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="12_2ku1j"]
 [ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="13_f31uk"]
 
-[node name="level1" type="Node2D"]
+[node name="level1" type="Node2D" unique_id=359999781]
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1615509943]
 offset_left = -76.0
 offset_top = -23.0
 offset_right = 1256.0
 offset_bottom = 749.0
 color = Color(0.5014065, 0.50140655, 0.50140643, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=703929180]
 position = Vector2(530, 297)
 scale = Vector2(1.3295897, 1.1948242)
 texture = ExtResource("1_u3awl")
 
-[node name="platform1" parent="." instance=ExtResource("1_ejswk")]
+[node name="platform1" parent="." unique_id=1195679282 instance=ExtResource("1_ejswk")]
 position = Vector2(73, 619)
 
-[node name="platform2" parent="." instance=ExtResource("2_bbk5w")]
+[node name="platform2" parent="." unique_id=603569210 instance=ExtResource("2_bbk5w")]
 position = Vector2(307, 619)
 
-[node name="platform3" parent="." instance=ExtResource("3_conm7")]
+[node name="platform3" parent="." unique_id=1851126402 instance=ExtResource("3_conm7")]
 position = Vector2(585, 539)
 
-[node name="wall1" parent="." instance=ExtResource("4_d3jkd")]
+[node name="wall1" parent="." unique_id=233459728 instance=ExtResource("4_d3jkd")]
 position = Vector2(717, 573)
 
-[node name="platform4" parent="." instance=ExtResource("1_ejswk")]
+[node name="platform4" parent="." unique_id=2021860864 instance=ExtResource("1_ejswk")]
 position = Vector2(1002, 427)
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=655200830]
 offset_left = 721.0
 offset_top = 454.0
 offset_right = 1275.0
 offset_bottom = 757.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="."]
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=2089616998]
 offset_left = 540.0
 offset_top = 558.0
 offset_right = 1094.0
 offset_bottom = 861.0
 color = Color(0, 0, 0, 1)
 
-[node name="moving" parent="." instance=ExtResource("10_d3jkd")]
+[node name="moving" parent="." unique_id=1663794689 instance=ExtResource("10_d3jkd")]
 position = Vector2(174, 475)
-start_position = Vector2(174, 475)
-end_position = Vector2(375, 475)
 
-[node name="MaskPickup" parent="." instance=ExtResource("6_2ku1j")]
+[node name="MaskPickup" parent="." unique_id=287679165 instance=ExtResource("6_2ku1j")]
 position = Vector2(154, 383)
 
-[node name="Player" parent="." instance=ExtResource("7_f31uk")]
+[node name="Player" parent="." unique_id=1462371948 instance=ExtResource("7_f31uk")]
 position = Vector2(137, 574)
 scale = Vector2(0.23999876, 0.23999876)
 
-[node name="wall2" parent="." instance=ExtResource("8_conm7")]
+[node name="wall2" parent="." unique_id=551042432 instance=ExtResource("8_conm7")]
 position = Vector2(-20, 483)
 
-[node name="wall4" parent="." instance=ExtResource("8_conm7")]
+[node name="wall4" parent="." unique_id=683971308 instance=ExtResource("8_conm7")]
 position = Vector2(-21, 235)
 
-[node name="wall3" parent="." instance=ExtResource("9_d3jkd")]
+[node name="wall3" parent="." unique_id=1246962990 instance=ExtResource("9_d3jkd")]
 position = Vector2(540, 643)
 
-[node name="platform5" parent="." instance=ExtResource("1_ejswk")]
+[node name="platform5" parent="." unique_id=2048357752 instance=ExtResource("1_ejswk")]
 position = Vector2(520, 620)
 
-[node name="platform6" parent="." instance=ExtResource("2_bbk5w")]
+[node name="platform6" parent="." unique_id=352361188 instance=ExtResource("2_bbk5w")]
 position = Vector2(762, 421)
 
-[node name="wall5" parent="." instance=ExtResource("9_d3jkd")]
+[node name="wall5" parent="." unique_id=670457340 instance=ExtResource("9_d3jkd")]
 position = Vector2(-17, 23)
 rotation = 3.1415927
 
-[node name="TextSpawner" parent="." instance=ExtResource("11_u3awl")]
+[node name="TextSpawner" parent="." unique_id=1629991820 instance=ExtResource("11_u3awl")]
 position = Vector2(77, 513)
 display_text = "USE A, D, SPACE
 TO MOVE"
 
-[node name="TextSpawner2" parent="." instance=ExtResource("11_u3awl")]
-position = Vector2(47, 341)
+[node name="TextSpawner2" parent="." unique_id=739241618 instance=ExtResource("11_u3awl")]
+position = Vector2(271, 308)
 display_text = "DOUBLE JUMP MASK
 TAP SPACE MID AIR"
 
-[node name="TextSpawner3" parent="." instance=ExtResource("11_u3awl")]
-position = Vector2(446, 412)
+[node name="TextSpawner3" parent="." unique_id=30952739 instance=ExtResource("11_u3awl")]
+position = Vector2(389, 427)
 display_text = "PICK UP MASKS
 "
 
-[node name="KeyPickup" parent="." instance=ExtResource("12_2ku1j")]
+[node name="KeyPickup" parent="." unique_id=1764842608 instance=ExtResource("12_2ku1j")]
 position = Vector2(819, 360)
 
-[node name="Door" parent="." instance=ExtResource("13_f31uk")]
+[node name="Door" parent="." unique_id=135181258 instance=ExtResource("13_f31uk")]
 position = Vector2(1040, 319)
 key = NodePath("../KeyPickup")
 next_scene = "res://scenes/level2.tscn"
+
+[node name="wall6" parent="." unique_id=1534946682 instance=ExtResource("4_d3jkd")]
+position = Vector2(1141, 314)

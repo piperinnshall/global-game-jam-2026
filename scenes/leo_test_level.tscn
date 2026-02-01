@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dashwall001" path="res://scenes/dashwall.tscn" id="2_6ltgx"]
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="2_b17tg"]
 [ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="3_ugxxg"]
+[ext_resource type="PackedScene" uid="uid://dwb07vpevsnoc" path="res://scenes/destrucableblock.tscn" id="6_uxmko"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b17tg"]
 size = Vector2(527, 45)
@@ -36,11 +37,14 @@ scale = Vector2(0.235, 0.235)
 
 [node name="MaskPickup" parent="." unique_id=2082499342 instance=ExtResource("3_ugxxg")]
 position = Vector2(625, 445)
-mask_type = 1
+mask_type = 3
 
 [node name="MaskPickup2" parent="." unique_id=1653430876 instance=ExtResource("3_ugxxg")]
-position = Vector2(189, 457)
+position = Vector2(154, 414)
 
 [node name="MaskPickup3" parent="." unique_id=1468473425 instance=ExtResource("3_ugxxg")]
 position = Vector2(503, 330)
 mask_type = 1
+
+[node name="DestructibleBlock" parent="." unique_id=1264603799 instance=ExtResource("6_uxmko")]
+position = Vector2(549, 501)

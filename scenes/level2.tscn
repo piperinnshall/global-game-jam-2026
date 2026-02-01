@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ol3umxipdt1d"]
 
+[ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_8g4ke"]
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_xa7n4"]
 [ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="2_bo4dx"]
 [ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="3_76toy"]
@@ -9,6 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="7_cleqw"]
 [ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="8_wvb8j"]
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_g8vcy"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="11_56gwk"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="12_ve5ok"]
+[ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="13_56gwk"]
 
 [node name="level2" type="Node2D" unique_id=201388534]
 
@@ -18,6 +22,11 @@ offset_top = -27.0
 offset_right = 1212.0
 offset_bottom = 745.0
 color = Color(0.39308554, 0.39308548, 0.39308557, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=89577446]
+position = Vector2(494.00006, 123.000015)
+scale = Vector2(1.3295897, 1.1948242)
+texture = ExtResource("1_8g4ke")
 
 [node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_xa7n4")]
 position = Vector2(-15, 398)
@@ -29,7 +38,7 @@ position = Vector2(918, 230)
 position = Vector2(298, 398)
 
 [node name="platform5" parent="." unique_id=738167066 instance=ExtResource("2_bo4dx")]
-position = Vector2(659, 328)
+position = Vector2(700.00006, 329)
 scale = Vector2(-0.695, 0.755)
 
 [node name="platform13" parent="." unique_id=915902365 instance=ExtResource("2_bo4dx")]
@@ -47,30 +56,22 @@ scale = Vector2(0.8, 0.69)
 position = Vector2(259, 528)
 
 [node name="tree" parent="." unique_id=511538616 instance=ExtResource("5_56gwk")]
-position = Vector2(1013, 640)
+position = Vector2(1025, 628)
 
 [node name="platform4" parent="." unique_id=1604225667 instance=ExtResource("1_xa7n4")]
 position = Vector2(396, 268)
 scale = Vector2(0.315, 0.405)
 
-[node name="platform8" parent="." unique_id=1008579988 instance=ExtResource("1_xa7n4")]
-position = Vector2(837.00006, 594.99994)
-scale = Vector2(0.355, 0.45)
-
 [node name="platform9" parent="." unique_id=1135309660 instance=ExtResource("1_xa7n4")]
-position = Vector2(778, 572)
+position = Vector2(837, 567)
 scale = Vector2(-0.305, 0.39)
 
 [node name="platform10" parent="." unique_id=1819957346 instance=ExtResource("1_xa7n4")]
 position = Vector2(654, 527)
 scale = Vector2(0.38, 0.56)
 
-[node name="platform11" parent="." unique_id=343512963 instance=ExtResource("1_xa7n4")]
-position = Vector2(563, 489)
-scale = Vector2(0.315, 0.535)
-
 [node name="platform12" parent="." unique_id=315679455 instance=ExtResource("1_xa7n4")]
-position = Vector2(431, 446.00003)
+position = Vector2(476.00003, 468.00003)
 scale = Vector2(0.525, 0.93)
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1279909957]
@@ -116,3 +117,15 @@ position = Vector2(574, 696)
 
 [node name="wall5" parent="." unique_id=1839151726 instance=ExtResource("8_wvb8j")]
 position = Vector2(442, 532)
+
+[node name="Door" parent="." unique_id=398854934 instance=ExtResource("11_56gwk")]
+position = Vector2(974, 126)
+key = NodePath("../KeyPickup")
+next_scene = "res://scenes/level_3.tscn"
+
+[node name="KeyPickup" parent="." unique_id=1116702729 instance=ExtResource("12_ve5ok")]
+position = Vector2(1024, 568)
+
+[node name="killzone" parent="." unique_id=800593481 instance=ExtResource("13_56gwk")]
+position = Vector2(634, 734)
+scale = Vector2(1.735, 1.735)

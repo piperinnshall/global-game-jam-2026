@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_eupwt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vplca"]
-size = Vector2(232, 47)
+size = Vector2(232, 21.5)
 
 [node name="moving" type="AnimatableBody2D" unique_id=1428898490]
 script = ExtResource("1_du00b")
@@ -17,5 +17,5 @@ region_enabled = true
 region_rect = Rect2(621, 300, 197, 239)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=624919414]
-position = Vector2(-5, 9)
+position = Vector2(-5, -3.75)
 shape = SubResource("RectangleShape2D_vplca")
