@@ -6,7 +6,7 @@ extends Node
 var covers := []
 
 func _ready():
-	for i in range(8):
+	for i in range(6):
 		covers.append(get_node("Cover%d" % i))
 
 	reveal_comic()
@@ -28,4 +28,3 @@ func fade_out(cover: Sprite2D) -> void:
 
 func complete() -> void:
 	print("Comic reveal complete!")
-	get_tree().change_scene_to_file("res://scenes/level1.tscn")

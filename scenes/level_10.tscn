@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://xpa1lq1vhnfv"]
+[gd_scene load_steps=16 format=3 uid="uid://xpa1lq1vhnfv"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_fl27d"]
 [ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_hclxg"]
@@ -16,138 +16,138 @@
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="13_upujw"]
 [ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="14_aa4c8"]
 
-[node name="level10" type="Node2D" unique_id=900059950]
+[node name="level10" type="Node2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=509237905]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(976, 60.000004)
 scale = Vector2(1.3295897, 1.1948242)
 texture = ExtResource("1_hclxg")
 
-[node name="DestructibleBlock10" parent="." unique_id=89448071 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock10" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(609, 491)
 
-[node name="platform6" parent="." unique_id=606031449 instance=ExtResource("1_uk14l")]
+[node name="platform6" parent="." instance=ExtResource("1_uk14l")]
 position = Vector2(-33, 327)
 
-[node name="platform1" parent="." unique_id=2099947380 instance=ExtResource("1_fl27d")]
+[node name="platform1" parent="." instance=ExtResource("1_fl27d")]
 position = Vector2(994, 385)
 
-[node name="moving" parent="." unique_id=1895124934 instance=ExtResource("2_ofuys")]
+[node name="moving" parent="." instance=ExtResource("2_ofuys")]
 position = Vector2(778, 240)
 direction = 1
 end_offset = 400.0
 
-[node name="Sprite2D" parent="moving" index="1" unique_id=1872257149]
+[node name="Sprite2D" parent="moving" index="1"]
 visible = false
 
-[node name="CollisionShape2D" parent="moving" index="2" unique_id=624919414]
+[node name="CollisionShape2D" parent="moving" index="2"]
 position = Vector2(-6, -5)
 
-[node name="MaskPickup" parent="." unique_id=1818785165 instance=ExtResource("3_21d8y")]
+[node name="MaskPickup" parent="." instance=ExtResource("3_21d8y")]
 position = Vector2(978, 325)
 mask_type = 3
 
-[node name="Player" parent="." unique_id=500713054 instance=ExtResource("4_e6rfr")]
+[node name="Player" parent="." instance=ExtResource("4_e6rfr")]
 position = Vector2(1081, 340)
 scale = Vector2(0.225, 0.225)
 
-[node name="platform2" parent="." unique_id=1629523795 instance=ExtResource("1_fl27d")]
+[node name="platform2" parent="." instance=ExtResource("1_fl27d")]
 position = Vector2(725, 111)
 scale = Vector2(0.81, 0.64)
 
-[node name="DestructibleBlock" parent="." unique_id=2024138305 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(523, 179)
 
-[node name="DestructibleBlock2" parent="." unique_id=69218099 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock2" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(545, 321)
 
-[node name="platform3" parent="." unique_id=369868512 instance=ExtResource("1_fl27d")]
+[node name="platform3" parent="." instance=ExtResource("1_fl27d")]
 position = Vector2(278, 504)
 
-[node name="platform4" parent="." unique_id=1657846685 instance=ExtResource("7_yxmu7")]
+[node name="platform4" parent="." instance=ExtResource("7_yxmu7")]
 position = Vector2(326, 318)
 scale = Vector2(0.775, 0.7)
 
-[node name="platform5" parent="." unique_id=1881971350 instance=ExtResource("1_fl27d")]
+[node name="platform5" parent="." instance=ExtResource("1_fl27d")]
 position = Vector2(-39, 503)
 
-[node name="MaskPickup2" parent="." unique_id=1753801168 instance=ExtResource("3_21d8y")]
+[node name="MaskPickup2" parent="." instance=ExtResource("3_21d8y")]
 position = Vector2(504, 426)
 
-[node name="MaskPickup3" parent="." unique_id=461598797 instance=ExtResource("3_21d8y")]
+[node name="MaskPickup3" parent="." instance=ExtResource("3_21d8y")]
 position = Vector2(510, 248)
 mask_type = 1
 
-[node name="DashThroughWall" parent="." unique_id=1370554420 instance=ExtResource("8_68dkj")]
+[node name="DashThroughWall" parent="." instance=ExtResource("8_68dkj")]
 position = Vector2(117, 432)
 
-[node name="KeyPickup" parent="." unique_id=1516736519 instance=ExtResource("9_bg236")]
+[node name="KeyPickup" parent="." instance=ExtResource("9_bg236")]
 position = Vector2(50, 455)
 
-[node name="DestructibleBlock3" parent="." unique_id=153896367 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock3" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(606, 189)
 
-[node name="DestructibleBlock4" parent="." unique_id=662317430 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock4" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(605, 403)
 
-[node name="wall1" parent="." unique_id=123417254 instance=ExtResource("10_upujw")]
+[node name="wall1" parent="." instance=ExtResource("10_upujw")]
 position = Vector2(1159, 246)
 
-[node name="platform7" parent="." unique_id=864832679 instance=ExtResource("1_fl27d")]
+[node name="platform7" parent="." instance=ExtResource("1_fl27d")]
 position = Vector2(200, 180)
 
-[node name="Door" parent="." unique_id=228108059 instance=ExtResource("11_aa4c8")]
+[node name="Door" parent="." instance=ExtResource("11_aa4c8")]
 position = Vector2(235, 78)
 key = NodePath("../KeyPickup")
-next_scene = "res://scenes/level_10.tscn"
+next_scene = "res://scenes/level_11.tscn"
 
-[node name="DestructibleBlock5" parent="." unique_id=852023283 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock5" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(606, 232)
 
-[node name="DestructibleBlock6" parent="." unique_id=1255215499 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock6" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(605, 275)
 
-[node name="DestructibleBlock7" parent="." unique_id=1471723029 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock7" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(605, 319)
 
-[node name="DestructibleBlock8" parent="." unique_id=1824361492 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock8" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(604, 361)
 
-[node name="DestructibleBlock9" parent="." unique_id=2062331156 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock9" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(608, 447)
 
-[node name="DestructibleBlock11" parent="." unique_id=303862092 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock11" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(608, 532)
 
-[node name="DestructibleBlock12" parent="." unique_id=799850312 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock12" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(607, 575)
 
-[node name="DestructibleBlock13" parent="." unique_id=295709946 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock13" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(608, 618)
 
-[node name="DestructibleBlock14" parent="." unique_id=49676246 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock14" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(498, 324)
 
-[node name="DestructibleBlock15" parent="." unique_id=449690726 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock15" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(547, 502)
 
-[node name="DestructibleBlock16" parent="." unique_id=1818170843 instance=ExtResource("6_ng28g")]
+[node name="DestructibleBlock16" parent="." instance=ExtResource("6_ng28g")]
 position = Vector2(504, 500)
 
-[node name="wall2" parent="." unique_id=1676820393 instance=ExtResource("10_upujw")]
+[node name="wall2" parent="." instance=ExtResource("10_upujw")]
 position = Vector2(122, 202)
 
-[node name="wall3" parent="." unique_id=945215487 instance=ExtResource("12_bg236")]
+[node name="wall3" parent="." instance=ExtResource("12_bg236")]
 position = Vector2(126, 56)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=626578220]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -44.0
 offset_top = -21.0
 offset_right = 129.0
 offset_bottom = 345.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=652773591]
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 0
 offset_left = 979.0
 offset_top = 422.0
@@ -155,7 +155,7 @@ offset_right = 1226.0
 offset_bottom = 788.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect/ColorRect" unique_id=1138834510]
+[node name="ColorRect" type="ColorRect" parent="ColorRect/ColorRect"]
 layout_mode = 0
 offset_left = -1056.0
 offset_top = 99.0
@@ -163,16 +163,16 @@ offset_right = -809.0
 offset_bottom = 465.0
 color = Color(0, 0, 0, 1)
 
-[node name="wall4" parent="." unique_id=1494584120 instance=ExtResource("10_upujw")]
+[node name="wall4" parent="." instance=ExtResource("10_upujw")]
 position = Vector2(947, 517)
 
-[node name="wall5" parent="." unique_id=768635228 instance=ExtResource("12_bg236")]
+[node name="wall5" parent="." instance=ExtResource("12_bg236")]
 position = Vector2(112, 612)
 
-[node name="wall6" parent="." unique_id=1405868667 instance=ExtResource("13_upujw")]
+[node name="wall6" parent="." instance=ExtResource("13_upujw")]
 position = Vector2(-25, 439)
 
-[node name="killzone" parent="." unique_id=1828803550 instance=ExtResource("14_aa4c8")]
+[node name="killzone" parent="." instance=ExtResource("14_aa4c8")]
 position = Vector2(547, 693)
 
 [editable path="moving"]
