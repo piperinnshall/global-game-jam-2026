@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dashwall001"]
+[gd_scene load_steps=0 format=3 uid="uid://dashwall001"]
 
 [ext_resource type="Script" uid="uid://bgpnq6qmytbuc" path="res://dash_through_wall.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://da8jr478jxqsm" path="res://Laser.png" id="2_wfl73"]
