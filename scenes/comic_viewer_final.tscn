@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://6cqodprrnwje"]
+[gd_scene format=3 uid="uid://6cqodprrnwje"]
 
-[ext_resource type="Script" uid="uid://dg4dgp6hfugcx" path="res://scripts/comic_viewer.gd" id="1_gdyvj"]
+[ext_resource type="Script" uid="uid://mh78b31rk2m3" path="res://scripts/comic_viewer2.gd" id="1_4iai4"]
 [ext_resource type="Texture2D" uid="uid://ctv3ajl41yfb2" path="res://comic/comic-final.png" id="2_4iai4"]
 [ext_resource type="Texture2D" uid="uid://ds2ygpucld6tg" path="res://comic/cover1.png" id="3_tkfuw"]
 [ext_resource type="Texture2D" uid="uid://cal23te1e1arv" path="res://comic/cover-final1.png" id="4_gdyvj"]
@@ -9,34 +9,34 @@
 [ext_resource type="Texture2D" uid="uid://b8urvlp5gvm5f" path="res://comic/cover-final4.png" id="7_oixjq"]
 [ext_resource type="Texture2D" uid="uid://jxltq4285ulv" path="res://comic/cover-final5.png" id="8_fdhin"]
 
-[node name="ComicViewerFinal" type="Node2D"]
-script = ExtResource("1_gdyvj")
+[node name="ComicViewerFinal" type="Node2D" unique_id=891214407]
+script = ExtResource("1_4iai4")
 
-[node name="Comic" type="Sprite2D" parent="."]
+[node name="Comic" type="Sprite2D" parent="." unique_id=227780630]
 position = Vector2(576, 324)
 texture = ExtResource("2_4iai4")
 
-[node name="Cover0" type="Sprite2D" parent="."]
+[node name="Cover0" type="Sprite2D" parent="." unique_id=2012505329]
 position = Vector2(576, 324)
 rotation = 3.1415927
 texture = ExtResource("3_tkfuw")
 
-[node name="Cover1" type="Sprite2D" parent="."]
+[node name="Cover1" type="Sprite2D" parent="." unique_id=953044578]
 position = Vector2(576, 324)
 texture = ExtResource("4_gdyvj")
 
-[node name="Cover2" type="Sprite2D" parent="."]
+[node name="Cover2" type="Sprite2D" parent="." unique_id=84971954]
 position = Vector2(576, 324)
 texture = ExtResource("5_6keo1")
 
-[node name="Cover3" type="Sprite2D" parent="."]
+[node name="Cover3" type="Sprite2D" parent="." unique_id=899915382]
 position = Vector2(576, 324)
 texture = ExtResource("6_tkfuw")
 
-[node name="Cover4" type="Sprite2D" parent="."]
+[node name="Cover4" type="Sprite2D" parent="." unique_id=1606302808]
 position = Vector2(576, 324)
 texture = ExtResource("7_oixjq")
 
-[node name="Cover5" type="Sprite2D" parent="."]
+[node name="Cover5" type="Sprite2D" parent="." unique_id=530085462]
 position = Vector2(576, 324)
 texture = ExtResource("8_fdhin")
