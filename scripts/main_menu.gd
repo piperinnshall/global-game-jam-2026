@@ -105,7 +105,7 @@ func _on_play_button_pressed():
 	
 	await fade_tween.finished
 	
-	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+	get_tree().change_scene_to_file("res://scenes/comic_viewer.tscn")
 
 func _on_quit_button_pressed():
 	# Snap effect on press
