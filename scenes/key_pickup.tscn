@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://on4efafttl3s"]
+
+[ext_resource type="Script" uid="uid://ecm04jufynxv" path="res://scripts/key_pickup.gd" id="1_qt5rs"]
+[ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_unm83"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_unm83"]
+radius = 25.079872
+
+[node name="KeyPickup" type="Area2D"]
+script = ExtResource("1_qt5rs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_unm83")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -4)
+texture = ExtResource("1_unm83")
+region_enabled = true
+region_rect = Rect2(290.12146, 275.1319, 80.48523, 78.473145)

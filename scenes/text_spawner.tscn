@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs663kevf65pj"]
+
+[ext_resource type="Script" uid="uid://l0ah87fd5e2n" path="res://scripts/text_spawner.gd" id="1_ca3dw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ca3dw"]
+size = Vector2(284, 89.5)
+
+[node name="TextSpawner" type="Area2D"]
+script = ExtResource("1_ca3dw")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 30
+text = "USE A, D, SPACE 
+TO MOVE"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(139, 43)
+shape = SubResource("RectangleShape2D_ca3dw")

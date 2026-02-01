@@ -1,83 +1,112 @@
-[gd_scene format=3 uid="uid://ccuujvesgo0lt"]
+[gd_scene load_steps=14 format=3 uid="uid://ccuujvesgo0lt"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_ejswk"]
 [ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_u3awl"]
 [ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="2_bbk5w"]
 [ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="3_conm7"]
 [ext_resource type="PackedScene" uid="uid://bgo2efk6ygmhu" path="res://scenes/wall_1.tscn" id="4_d3jkd"]
-[ext_resource type="PackedScene" uid="uid://cefhcmwm3xxl4" path="res://scenes/tree.tscn" id="5_u3awl"]
 [ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="6_2ku1j"]
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="7_f31uk"]
 [ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="8_conm7"]
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_d3jkd"]
-[ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="10_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://ojs5t0mnrg78" path="res://scenes/moving.tscn" id="10_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://cs663kevf65pj" path="res://scenes/text_spawner.tscn" id="11_u3awl"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="12_2ku1j"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="13_f31uk"]
 
-[node name="level1" type="Node2D" unique_id=513311648]
+[node name="level1" type="Node2D"]
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=1655758863]
+[node name="ColorRect2" type="ColorRect" parent="."]
 offset_left = -76.0
 offset_top = -23.0
 offset_right = 1256.0
 offset_bottom = 749.0
 color = Color(0.5014065, 0.50140655, 0.50140643, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1457708138]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(530, 297)
 scale = Vector2(1.3295897, 1.1948242)
 texture = ExtResource("1_u3awl")
 
-[node name="platform1" parent="." unique_id=747474710 instance=ExtResource("1_ejswk")]
+[node name="platform1" parent="." instance=ExtResource("1_ejswk")]
 position = Vector2(73, 619)
 
-[node name="platform2" parent="." unique_id=1155438177 instance=ExtResource("2_bbk5w")]
+[node name="platform2" parent="." instance=ExtResource("2_bbk5w")]
 position = Vector2(307, 619)
 
-[node name="platform3" parent="." unique_id=1895611990 instance=ExtResource("3_conm7")]
+[node name="platform3" parent="." instance=ExtResource("3_conm7")]
 position = Vector2(585, 539)
 
-[node name="wall1" parent="." unique_id=1620947529 instance=ExtResource("4_d3jkd")]
+[node name="wall1" parent="." instance=ExtResource("4_d3jkd")]
 position = Vector2(717, 573)
 
-[node name="tree" parent="." unique_id=168248623 instance=ExtResource("5_u3awl")]
-position = Vector2(813, 435)
-
-[node name="platform4" parent="." unique_id=713454153 instance=ExtResource("1_ejswk")]
+[node name="platform4" parent="." instance=ExtResource("1_ejswk")]
 position = Vector2(1002, 427)
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=533817204]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 721.0
 offset_top = 454.0
 offset_right = 1275.0
 offset_bottom = 757.0
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="." unique_id=602119170]
+[node name="ColorRect3" type="ColorRect" parent="."]
 offset_left = 540.0
 offset_top = 558.0
 offset_right = 1094.0
 offset_bottom = 861.0
 color = Color(0, 0, 0, 1)
 
-[node name="moving" parent="." unique_id=248544153 instance=ExtResource("10_d3jkd")]
+[node name="moving" parent="." instance=ExtResource("10_d3jkd")]
 position = Vector2(174, 475)
 start_position = Vector2(174, 475)
 end_position = Vector2(375, 475)
 
-[node name="MaskPickup" parent="." unique_id=453770201 instance=ExtResource("6_2ku1j")]
+[node name="MaskPickup" parent="." instance=ExtResource("6_2ku1j")]
 position = Vector2(154, 383)
 
-[node name="Player" parent="." unique_id=1235206918 instance=ExtResource("7_f31uk")]
+[node name="Player" parent="." instance=ExtResource("7_f31uk")]
 position = Vector2(137, 574)
 scale = Vector2(0.23999876, 0.23999876)
 
-[node name="wall2" parent="." unique_id=1513851279 instance=ExtResource("8_conm7")]
+[node name="wall2" parent="." instance=ExtResource("8_conm7")]
 position = Vector2(-20, 483)
 
-[node name="wall4" parent="." unique_id=1002285797 instance=ExtResource("8_conm7")]
+[node name="wall4" parent="." instance=ExtResource("8_conm7")]
 position = Vector2(-21, 235)
 
-[node name="wall3" parent="." unique_id=921847368 instance=ExtResource("9_d3jkd")]
+[node name="wall3" parent="." instance=ExtResource("9_d3jkd")]
 position = Vector2(540, 643)
 
-[node name="platform5" parent="." unique_id=1652989262 instance=ExtResource("1_ejswk")]
+[node name="platform5" parent="." instance=ExtResource("1_ejswk")]
 position = Vector2(520, 620)
+
+[node name="platform6" parent="." instance=ExtResource("2_bbk5w")]
+position = Vector2(762, 421)
+
+[node name="wall5" parent="." instance=ExtResource("9_d3jkd")]
+position = Vector2(-17, 23)
+rotation = 3.1415927
+
+[node name="TextSpawner" parent="." instance=ExtResource("11_u3awl")]
+position = Vector2(77, 513)
+display_text = "USE A, D, SPACE
+TO MOVE"
+
+[node name="TextSpawner2" parent="." instance=ExtResource("11_u3awl")]
+position = Vector2(47, 341)
+display_text = "DOUBLE JUMP MASK
+TAP SPACE MID AIR"
+
+[node name="TextSpawner3" parent="." instance=ExtResource("11_u3awl")]
+position = Vector2(446, 412)
+display_text = "PICK UP MASKS
+"
+
+[node name="KeyPickup" parent="." instance=ExtResource("12_2ku1j")]
+position = Vector2(819, 360)
+
+[node name="Door" parent="." instance=ExtResource("13_f31uk")]
+position = Vector2(1040, 319)
+key = NodePath("../KeyPickup")
+next_scene = "res://scenes/level2.tscn"
