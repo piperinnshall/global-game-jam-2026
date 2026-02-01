@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cij5tka1vkp6b"]
+
+[ext_resource type="Texture2D" uid="uid://bcs47mkxldcay" path="res://level-sprites.png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://fg5xiwehte6f" path="res://scripts/door.gd" id="1_uvdjg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpvv5"]
+size = Vector2(76.5, 135.75)
+
+[node name="Door" type="Area2D"]
+script = ExtResource("1_uvdjg")
+
+[node name="WhiteRect" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = -46.0
+offset_right = 45.0
+offset_bottom = 99.0
+
+[node name="Open" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(146.78716, 271.06396, 83.316696, 99.7182)
+
+[node name="BlackRect" type="ColorRect" parent="."]
+offset_left = -40.0
+offset_top = -46.0
+offset_right = 45.0
+offset_bottom = 99.0
+color = Color(0, 0, 0, 1)
+
+[node name="Closed" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_hpvv5")
+region_enabled = true
+region_rect = Rect2(25.112, 269.77713, 83.317, 101.00485)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 31.125)
+shape = SubResource("RectangleShape2D_hpvv5")

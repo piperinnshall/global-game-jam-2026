@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ccuujvesgo0lt"]
+[gd_scene load_steps=14 format=3 uid="uid://ccuujvesgo0lt"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_ejswk"]
 [ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_u3awl"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://som77tdo218i" path="res://scenes/wall_3.tscn" id="9_d3jkd"]
 [ext_resource type="PackedScene" uid="uid://ojs5t0mnrg78" path="res://scenes/moving.tscn" id="10_d3jkd"]
 [ext_resource type="PackedScene" uid="uid://cs663kevf65pj" path="res://scenes/text_spawner.tscn" id="11_u3awl"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="12_2ku1j"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="13_f31uk"]
 
 [node name="level1" type="Node2D"]
 
@@ -100,3 +102,11 @@ TAP SPACE MID AIR"
 position = Vector2(446, 412)
 display_text = "PICK UP MASKS
 "
+
+[node name="KeyPickup" parent="." instance=ExtResource("12_2ku1j")]
+position = Vector2(819, 360)
+
+[node name="Door" parent="." instance=ExtResource("13_f31uk")]
+position = Vector2(1040, 319)
+key = NodePath("../KeyPickup")
+next_scene = "res://scenes/level2.tscn"
