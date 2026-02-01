@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://dqr0dvw0qjsgu"]
+
+[ext_resource type="Texture2D" uid="uid://c2r6q1atkrpbn" path="res://background.png" id="1_bsx3y"]
+[ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_g5egw"]
+[ext_resource type="PackedScene" uid="uid://dwb07vpevsnoc" path="res://scenes/destrucableblock.tscn" id="2_b1n5o"]
+[ext_resource type="PackedScene" uid="uid://bwmk35v652025" path="res://scenes/platform_2.tscn" id="3_snfn4"]
+[ext_resource type="PackedScene" uid="uid://d0i8x46tsysrd" path="res://scenes/platform_3.tscn" id="4_ysmsy"]
+[ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="5_gi7hc"]
+[ext_resource type="PackedScene" uid="uid://bymt7cwwjummy" path="res://scenes/mask_pickup.tscn" id="6_3ijp0"]
+[ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="7_iynha"]
+[ext_resource type="PackedScene" uid="uid://cefhcmwm3xxl4" path="res://scenes/tree.tscn" id="8_r51xj"]
+[ext_resource type="PackedScene" uid="uid://bgo2efk6ygmhu" path="res://scenes/wall_1.tscn" id="9_bsx3y"]
+[ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="10_jpidd"]
+[ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="11_76cy3"]
+[ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="12_r51xj"]
+[ext_resource type="PackedScene" uid="uid://cl5cbc2c4lrhx" path="res://scenes/wall_2.tscn" id="13_bsx3y"]
+
+[node name="level8" type="Node2D" unique_id=847642962]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1158286727]
+position = Vector2(222, 291)
+scale = Vector2(1.3295897, 1.1948242)
+texture = ExtResource("1_bsx3y")
+
+[node name="platform1" parent="." unique_id=1329440570 instance=ExtResource("1_g5egw")]
+position = Vector2(63, 167)
+
+[node name="DestructibleBlock" parent="." unique_id=1264603799 instance=ExtResource("2_b1n5o")]
+position = Vector2(410, 218)
+
+[node name="DestructibleBlock2" parent="." unique_id=66824833 instance=ExtResource("2_b1n5o")]
+position = Vector2(450, 219)
+
+[node name="DestructibleBlock3" parent="." unique_id=1009178440 instance=ExtResource("2_b1n5o")]
+position = Vector2(409, 258)
+
+[node name="DestructibleBlock4" parent="." unique_id=1136930353 instance=ExtResource("2_b1n5o")]
+position = Vector2(450, 258)
+
+[node name="platform2" parent="." unique_id=930743751 instance=ExtResource("3_snfn4")]
+position = Vector2(484, 284.00003)
+scale = Vector2(1.635, 1.2)
+
+[node name="platform4" parent="." unique_id=1374782373 instance=ExtResource("1_g5egw")]
+position = Vector2(850, 140)
+
+[node name="DestructibleBlock5" parent="." unique_id=1263084008 instance=ExtResource("2_b1n5o")]
+position = Vector2(628, 265)
+
+[node name="DestructibleBlock6" parent="." unique_id=1378137224 instance=ExtResource("2_b1n5o")]
+position = Vector2(630, 231)
+
+[node name="DestructibleBlock7" parent="." unique_id=939685789 instance=ExtResource("2_b1n5o")]
+position = Vector2(634, 194)
+
+[node name="DestructibleBlock8" parent="." unique_id=1077740737 instance=ExtResource("2_b1n5o")]
+position = Vector2(665, 194)
+
+[node name="DestructibleBlock9" parent="." unique_id=864113376 instance=ExtResource("2_b1n5o")]
+position = Vector2(666, 230)
+
+[node name="DestructibleBlock10" parent="." unique_id=1574178414 instance=ExtResource("2_b1n5o")]
+position = Vector2(666, 266)
+
+[node name="DestructibleBlock11" parent="." unique_id=81310923 instance=ExtResource("2_b1n5o")]
+position = Vector2(704, 267)
+
+[node name="DestructibleBlock12" parent="." unique_id=680867827 instance=ExtResource("2_b1n5o")]
+position = Vector2(699, 229)
+
+[node name="Player" parent="." unique_id=291978468 instance=ExtResource("5_gi7hc")]
+position = Vector2(67.00006, 120.00003)
+scale = Vector2(0.24, 0.24)
+
+[node name="MaskPickup" parent="." unique_id=1479286999 instance=ExtResource("6_3ijp0")]
+position = Vector2(848, 60)
+mask_type = 3
+
+[node name="KeyPickup" parent="." unique_id=932035228 instance=ExtResource("7_iynha")]
+position = Vector2(969, 84)
+
+[node name="tree" parent="." unique_id=1760614403 instance=ExtResource("8_r51xj")]
+position = Vector2(119, 565)
+
+[node name="wall1" parent="." unique_id=1534946682 instance=ExtResource("9_bsx3y")]
+position = Vector2(193, 673)
+
+[node name="killzone" parent="." unique_id=800593481 instance=ExtResource("10_jpidd")]
+position = Vector2(535, 876)
+scale = Vector2(1.655, 1.655)
+
+[node name="moving" parent="." unique_id=1428898490 instance=ExtResource("11_76cy3")]
+position = Vector2(345, 565)
+end_offset = 100.0
+
+[node name="Sprite2D" parent="moving" index="1" unique_id=1872257149]
+visible = false
+
+[node name="DestructibleBlock13" parent="." unique_id=146465708 instance=ExtResource("2_b1n5o")]
+position = Vector2(535, 577)
+
+[node name="DestructibleBlock14" parent="." unique_id=1683092931 instance=ExtResource("2_b1n5o")]
+position = Vector2(1441, 541)
+
+[node name="DestructibleBlock15" parent="." unique_id=1708812 instance=ExtResource("2_b1n5o")]
+position = Vector2(534, 537)
+
+[node name="DestructibleBlock16" parent="." unique_id=563421190 instance=ExtResource("2_b1n5o")]
+position = Vector2(575, 577)
+
+[node name="DestructibleBlock17" parent="." unique_id=382515138 instance=ExtResource("2_b1n5o")]
+position = Vector2(738, 497)
+
+[node name="DestructibleBlock18" parent="." unique_id=210999591 instance=ExtResource("2_b1n5o")]
+position = Vector2(778, 497)
+
+[node name="DestructibleBlock19" parent="." unique_id=1562524360 instance=ExtResource("2_b1n5o")]
+position = Vector2(738, 536)
+
+[node name="DestructibleBlock20" parent="." unique_id=1248523191 instance=ExtResource("2_b1n5o")]
+position = Vector2(779, 536)
+
+[node name="DestructibleBlock22" parent="." unique_id=2075540486 instance=ExtResource("2_b1n5o")]
+position = Vector2(698, 576)
+
+[node name="DestructibleBlock23" parent="." unique_id=271188217 instance=ExtResource("2_b1n5o")]
+position = Vector2(655, 577)
+
+[node name="wall2" parent="." unique_id=427339092 instance=ExtResource("9_bsx3y")]
+position = Vector2(746, 664)
+
+[node name="MaskPickup2" parent="." unique_id=1032263329 instance=ExtResource("6_3ijp0")]
+position = Vector2(673, 514)
+
+[node name="DestructibleBlock21" parent="." unique_id=1675502867 instance=ExtResource("2_b1n5o")]
+position = Vector2(614, 577)
+
+[node name="wall3" parent="." unique_id=652467280 instance=ExtResource("9_bsx3y")]
+position = Vector2(803, 245)
+
+[node name="platform3" parent="." unique_id=429574875 instance=ExtResource("4_ysmsy")]
+position = Vector2(834, 563)
+
+[node name="Door" parent="." unique_id=1525523408 instance=ExtResource("12_r51xj")]
+position = Vector2(906, 461)
+key = NodePath("../KeyPickup")
+next_scene = "res://scenes/level_9.tscn"
+
+[node name="wall4" parent="." unique_id=1981014750 instance=ExtResource("9_bsx3y")]
+position = Vector2(1050, 21)
+
+[node name="wall5" parent="." unique_id=292770186 instance=ExtResource("13_bsx3y")]
+position = Vector2(1006, 446)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1721642286]
+offset_left = 808.0
+offset_top = 152.0
+offset_right = 1189.0
+offset_bottom = 380.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=1517459121]
+layout_mode = 0
+offset_left = 257.0
+offset_top = -186.0
+offset_right = 388.0
+offset_bottom = 42.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/ColorRect" unique_id=1605793679]
+layout_mode = 0
+offset_left = -57.0
+offset_top = 384.0
+offset_right = 142.0
+offset_bottom = 712.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/ColorRect/ColorRect" unique_id=1967022815]
+layout_mode = 0
+offset_left = -254.0
+offset_top = 228.0
+offset_right = 125.0
+offset_bottom = 556.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=518237818]
+offset_left = -68.0
+offset_top = 562.0
+offset_right = 204.0
+offset_bottom = 890.0
+color = Color(0, 0, 0, 1)
+
+[editable path="moving"]

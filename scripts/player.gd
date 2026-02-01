@@ -148,18 +148,21 @@ func _physics_process(delta: float) -> void:
 		start_flip()
 		facing_direction = -1
 	
-	# Handle jump (with double jump support) - only if NOT wearing Mask 4
-	if current_mask != MaskType.MASK_4 and Input.is_action_just_pressed("ui_accept") and jumps_remaining > 0:
-		velocity.y = jump_velocity
-		jumps_remaining -= 1
-		target_scale = jump_stretch  # Stretch when jumping
-		
-		# Different effects based on jump type
-		if jumps_remaining == max_jumps - 1:  # First jump
+	# Handle jump - FIXED: Can only jump in air with double jump mask
+	if current_mask != MaskType.MASK_4 and Input.is_action_just_pressed("ui_accept"):
+		# First jump: must be on floor
+		if is_on_floor() and jumps_remaining > 0:
+			velocity.y = jump_velocity
+			jumps_remaining -= 1
+			target_scale = jump_stretch
 			emit_jump_particles()
 			if jump_trail:
 				jump_trail.emitting = true
-		else:  # Double jump
+		# Double jump: only if we have double jump ability and jumps remaining
+		elif not is_on_floor() and jumps_remaining > 0 and max_jumps > 1:
+			velocity.y = jump_velocity
+			jumps_remaining -= 1
+			target_scale = jump_stretch
 			emit_double_jump_effect()
 	
 	# Apply horizontal movement with acceleration
@@ -296,6 +299,7 @@ func update_flip_animation(delta: float) -> void:
 	sprite_container.scale = Vector2(facing_direction * flip_squash, current_y_scale)
 
 func equip_mask(mask_type: MaskType) -> void:
+	$PickupSound.play()
 	"""Equip a specific mask and show it on the character"""
 	current_mask = mask_type
 	

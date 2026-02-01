@@ -17,7 +17,7 @@ offset_left = -110.0
 offset_top = -74.0
 offset_right = 1355.0
 offset_bottom = 807.0
-color = Color(0.017732391, 0.017732391, 0.01773239, 1)
+color = Color(0.006827848, 0, 0, 1)
 
 [node name="platform7" parent="." unique_id=1392562307 instance=ExtResource("1_uwxec")]
 position = Vector2(506, 466)

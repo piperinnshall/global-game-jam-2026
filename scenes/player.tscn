@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cls8m0ae5mljn" path="res://sounds/dashsound.mp3" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://hnyihlv3x4wr" path="res://sounds/landsound.mp3" id="4_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://cmnyulirgsmyk" path="res://sounds/shockwavesound.mp3" id="5_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://dighnrwsv3vsm" path="res://sounds/maskputonsound.mp3" id="7_fjrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(193, 191)
@@ -110,6 +111,7 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D" unique_id=291978468]
 script = ExtResource("1_g2els")
+air_acceleration = 700.0
 
 [node name="SpriteContainer" type="Node2D" parent="." unique_id=384434800]
 
@@ -215,7 +217,8 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_dash")
 
 [node name="Mask3Light" type="PointLight2D" parent="." unique_id=516039842]
-energy = 8.47
+energy = 13.7
+blend_mode = 2
 texture = SubResource("GradientTexture2D_g2els")
 texture_scale = 25.29
 
@@ -226,7 +229,7 @@ pitch_scale = 1.95
 
 [node name="LandSound" type="AudioStreamPlayer" parent="." unique_id=1474853314]
 stream = ExtResource("4_tuyoq")
-volume_db = -9.123
+volume_db = -18.246
 pitch_scale = 0.9
 
 [node name="Dashsound" type="AudioStreamPlayer" parent="." unique_id=1878845496]
@@ -237,3 +240,8 @@ pitch_scale = 0.52
 [node name="ShockwaveSound" type="AudioStreamPlayer" parent="." unique_id=1636623931]
 stream = ExtResource("5_qlg0r")
 volume_db = -10.947
+
+[node name="PickupSound" type="AudioStreamPlayer" parent="." unique_id=193533553]
+stream = ExtResource("7_fjrip")
+volume_db = -5.474
+pitch_scale = 0.75

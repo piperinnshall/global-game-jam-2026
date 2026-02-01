@@ -32,9 +32,11 @@ func _on_body_entered(body: Node2D) -> void:
 		collect()
 
 func collect() -> void:
+	$PickupSound.play()
 	collected = true
 	
 	# Hide sprite immediately
+	
 	sprite.visible = false
 	
 	if collision_shape:
