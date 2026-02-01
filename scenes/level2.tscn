@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cij5tka1vkp6b" path="res://scenes/door.tscn" id="11_56gwk"]
 [ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="12_ve5ok"]
 [ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="13_56gwk"]
+[ext_resource type="PackedScene" uid="uid://cs663kevf65pj" path="res://scenes/text_spawner.tscn" id="14_ve5ok"]
 
 [node name="level2" type="Node2D" unique_id=201388534]
 
@@ -129,3 +130,7 @@ position = Vector2(1024, 568)
 [node name="killzone" parent="." unique_id=800593481 instance=ExtResource("13_56gwk")]
 position = Vector2(634, 734)
 scale = Vector2(1.735, 1.735)
+
+[node name="TextSpawner2" parent="." unique_id=1820441963 instance=ExtResource("14_ve5ok")]
+position = Vector2(262, 69)
+display_text = "DASH MASK. DOUBLE TAP A OR D TO DASH"

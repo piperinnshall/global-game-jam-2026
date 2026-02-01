@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://on4efafttl3s" path="res://scenes/key_pickup.tscn" id="11_g31h8"]
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="12_hy5x3"]
 [ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="13_py6g0"]
+[ext_resource type="PackedScene" uid="uid://cs663kevf65pj" path="res://scenes/text_spawner.tscn" id="14_g31h8"]
 
 [node name="level4" type="Node2D" unique_id=807512350]
 
@@ -134,3 +135,7 @@ scale = Vector2(0.235, 0.235)
 [node name="killzone" parent="." unique_id=800593481 instance=ExtResource("13_py6g0")]
 position = Vector2(1004, 744.00006)
 scale = Vector2(1.805, 1.805)
+
+[node name="TextSpawner2" parent="." unique_id=1480801684 instance=ExtResource("14_g31h8")]
+position = Vector2(201, 270)
+display_text = "BLAST MASK. SEND A BLAST OUT WITH SPACE"

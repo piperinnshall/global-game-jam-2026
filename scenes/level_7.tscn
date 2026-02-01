@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvkof3cjn3c8"]
+[gd_scene format=3 uid="uid://dvkof3cjn3c8"]
 
 [ext_resource type="PackedScene" uid="uid://dfjh6fpqjaim7" path="res://scenes/platform_1.tscn" id="1_7itlh"]
 [ext_resource type="PackedScene" uid="uid://v312kyiomvfc" path="res://scenes/moving.tscn" id="2_l1kof"]
@@ -10,61 +10,69 @@
 [ext_resource type="PackedScene" uid="uid://bf1of67no735k" path="res://scenes/player.tscn" id="8_ophlp"]
 [ext_resource type="PackedScene" uid="uid://cr1jj4tq26spb" path="res://scenes/killzone.tscn" id="9_wu5f3"]
 
-[node name="level7" type="Node2D"]
+[node name="level7" type="Node2D" unique_id=1884272677]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=829972354]
 offset_left = -259.0
 offset_top = -262.0
 offset_right = 1596.0
 offset_bottom = 875.0
 color = Color(0.003921569, 0.003921569, 0.003921569, 1)
 
-[node name="platform1" parent="." instance=ExtResource("1_7itlh")]
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=913699653]
+offset_left = -110.0
+offset_top = -74.0
+offset_right = 1355.0
+offset_bottom = 807.0
+pivot_offset = Vector2(915, -68)
+color = Color(0.008210276, 0, 0, 1)
+
+[node name="platform1" parent="." unique_id=640078689 instance=ExtResource("1_7itlh")]
 position = Vector2(74, 128)
 
-[node name="moving" parent="." instance=ExtResource("2_l1kof")]
+[node name="moving" parent="." unique_id=1029920671 instance=ExtResource("2_l1kof")]
 position = Vector2(426, 135)
 direction = 1
 
-[node name="platform2" parent="." instance=ExtResource("3_v7yg4")]
+[node name="platform2" parent="." unique_id=20904306 instance=ExtResource("3_v7yg4")]
 position = Vector2(85, 381)
 
-[node name="platform3" parent="." instance=ExtResource("4_ci1vt")]
+[node name="platform3" parent="." unique_id=1678632077 instance=ExtResource("4_ci1vt")]
 position = Vector2(347, 561)
 
-[node name="platform4" parent="." instance=ExtResource("3_v7yg4")]
+[node name="platform4" parent="." unique_id=1984468219 instance=ExtResource("3_v7yg4")]
 position = Vector2(725, 554)
 
-[node name="MaskPickup" parent="." instance=ExtResource("5_ci1vt")]
+[node name="MaskPickup" parent="." unique_id=929589250 instance=ExtResource("5_ci1vt")]
 position = Vector2(769, 491)
 
-[node name="platform5" parent="." instance=ExtResource("1_7itlh")]
+[node name="platform5" parent="." unique_id=550396789 instance=ExtResource("1_7itlh")]
 position = Vector2(1010, 434)
 
-[node name="moving2" parent="." instance=ExtResource("2_l1kof")]
+[node name="moving2" parent="." unique_id=1890581868 instance=ExtResource("2_l1kof")]
 position = Vector2(759, 154)
 direction = 1
 wait_time = 3.0
 
-[node name="KeyPickup" parent="." instance=ExtResource("6_ophlp")]
+[node name="KeyPickup" parent="." unique_id=1219887113 instance=ExtResource("6_ophlp")]
 position = Vector2(415, 501)
 
-[node name="platform6" parent="." instance=ExtResource("4_ci1vt")]
+[node name="platform6" parent="." unique_id=456366504 instance=ExtResource("4_ci1vt")]
 position = Vector2(1003, 225)
 
-[node name="Door" parent="." instance=ExtResource("7_wu5f3")]
+[node name="Door" parent="." unique_id=1849131344 instance=ExtResource("7_wu5f3")]
 position = Vector2(1058, 128)
 key = NodePath("../KeyPickup")
 next_scene = "res://scenes/level_8.tscn"
 
-[node name="MaskPickup2" parent="." instance=ExtResource("5_ci1vt")]
+[node name="MaskPickup2" parent="." unique_id=2046710667 instance=ExtResource("5_ci1vt")]
 position = Vector2(197, 62)
 mask_type = 2
 
-[node name="Player" parent="." instance=ExtResource("8_ophlp")]
+[node name="Player" parent="." unique_id=1824977947 instance=ExtResource("8_ophlp")]
 position = Vector2(72.99999, 68.99999)
 scale = Vector2(0.24, 0.24)
 
-[node name="killzone" parent="." instance=ExtResource("9_wu5f3")]
+[node name="killzone" parent="." unique_id=1499487450 instance=ExtResource("9_wu5f3")]
 position = Vector2(673, 784)
 scale = Vector2(2.2, 2.2)

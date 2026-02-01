@@ -217,10 +217,10 @@ explosiveness = 0.5
 process_material = SubResource("ParticleProcessMaterial_dash")
 
 [node name="Mask3Light" type="PointLight2D" parent="." unique_id=516039842]
-energy = 13.7
+energy = 16.0
 blend_mode = 2
 texture = SubResource("GradientTexture2D_g2els")
-texture_scale = 25.29
+texture_scale = 34.17
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="." unique_id=1114684902]
 stream = ExtResource("3_dqkch")

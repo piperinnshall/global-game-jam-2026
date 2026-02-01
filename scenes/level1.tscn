@@ -87,12 +87,12 @@ position = Vector2(-17, 23)
 rotation = 3.1415927
 
 [node name="TextSpawner" parent="." unique_id=1629991820 instance=ExtResource("11_u3awl")]
-position = Vector2(77, 513)
+position = Vector2(54, 473)
 display_text = "USE A, D, SPACE
 TO MOVE"
 
 [node name="TextSpawner2" parent="." unique_id=739241618 instance=ExtResource("11_u3awl")]
-position = Vector2(271, 308)
+position = Vector2(210, 313)
 display_text = "DOUBLE JUMP MASK
 TAP SPACE MID AIR"
 
